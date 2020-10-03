@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1i8szT4TPCQQ9eaRfoEEqjn6Xda" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../django-app" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="" />
+      <created>1601300815569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601300815569</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="742" y="308" width="426" height="456" key="FileChooserDialogImpl" timestamp="1601371372056">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="742" y="308" width="426" height="456" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1601371372056" />
+    <state x="453" y="201" key="SettingsEditor" timestamp="1601545978698">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="453" y="201" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1601545978698" />
+    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601714729148">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1601714729148" />
+    <state x="623" y="256" width="672" height="678" key="search.everywhere.popup" timestamp="1601455682535">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="256" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1601455682535" />
+  </component>
+</project>
