@@ -85,10 +85,16 @@ WSGI_APPLICATION = 'vietify_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+MODE = os.environ.get('MODE')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'musicdb',
+        'USER': 'postgres',
+        'PASSWORD': 'qviet1997',
+        'HOST': '127.0.0.1' if MODE == 'dev' else 'django-db.ctq5ilytyql4.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -137,7 +143,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MODE = os.environ.get('MODE')
 
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_QUERYSTRING_AUTH = False
@@ -185,7 +190,8 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'Accounts.VieUser'
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000',
-                        'http://localhost:8000',]
+                        'http://localhost:8000',
+                        'http://18.192.37.56']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
