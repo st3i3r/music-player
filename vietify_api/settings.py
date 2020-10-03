@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'musicdb',
         'USER': 'postgres',
         'PASSWORD': 'qviet1997',
-        'HOST': '127.0.0.1' if MODE == 'dev' else 'django-db.ctq5ilytyql4.eu-central-1.rds.amazonaws.com',
+        'HOST': '127.0.0.1' if MODE == 'dev' else 'music-db.ctq5ilytyql4.eu-central-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
