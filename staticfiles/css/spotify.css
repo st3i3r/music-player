@@ -206,10 +206,16 @@ html, body, .container-fluid {
     background: linear-gradient(to top, black,  rgba(10, 10, 10, 0.1)) ! important;
 }
 
-thead th {
+#songListHeader {
     position: sticky;
-    background: #212121;
     top: 0;
+    background-color: #1a1a1a;
+    border-bottom: solid 2px white;
+    z-index: 10;
+}
+
+#songList .song {
+    line-height: 2.5;
 }
 
 .info-bar {
@@ -223,28 +229,28 @@ thead th {
     border-radius: 0;
 }
 
-tr.song {
+.song {
     cursor: pointer;
     line-height: 0.4;
     color: var(--clr-light);
     border-bottom: 1px solid #444444;
 }
 
-tr.song:hover {
+.song:hover {
     color: white;
 }
 
-tr.song.active {
+.song.active {
     color: var(--clr-dark);
     background: var(--clr-green);
     box-shadow: 0 0 10px var(--clr-green), 0 0 15px var(--clr-green), 0 0 30px var(--clr-green);
 }
 
-tr.song .modal {
+.song .modal {
     color: var(--clr-light);
 }
 
-tr.song .modal.playlist-card {
+.song .modal.playlist-card {
     cursor: pointer;
 }
 
