@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="" />
+    <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spotify/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spotify/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/models.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/spotify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/spotify.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/spotify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vietify_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +22,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1i8szT4TPCQQ9eaRfoEEqjn6Xda" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -41,6 +55,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="663" y="351" width="584" height="371" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601731363830">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="663" y="351" width="584" height="371" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1601731363830" />
     <state x="742" y="308" width="426" height="456" key="FileChooserDialogImpl" timestamp="1601371372056">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

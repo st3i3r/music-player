@@ -1,4 +1,5 @@
 import axiosInstance from './axios.js';
+import {API_BASE_URL} from './env.js';
 import PlayerModel from './models.js';
 import {RootView, PlayerState, PlaylistState, BrowseState, AccountState, fadeOut, fadeIn} from './views.js';
 
@@ -472,7 +473,7 @@ class PlayerController {
     handlerUploadLocalFile = async (displayTitle, title, artist, files) => {
         const config = { headers: {'Content-Type': 'multipart/form-data',
                                     Authorization: 'JWT ' + localStorage.getItem('access_token')} };
-        const URL = 'http://localhost:8000/api/song/';
+        const URL = `${API_BASE_URL}/song/`;
         let formData = new FormData();
         formData.append('display_title', displayTitle);
         formData.append('title', title);

@@ -137,14 +137,14 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-mode = os.environ.get('MODE')
+MODE = os.environ.get('MODE')
 
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_DEFAULT_ACL = 'public-read'
 
-if mode == 'dev':
+if MODE == 'dev':
     config = configparser.ConfigParser()
     module_dir = os.path.split(os.path.abspath(__file__))[0]
     config.read(f'{module_dir}/config.ini')
@@ -158,7 +158,7 @@ if mode == 'dev':
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
-elif mode == 'prod':
+elif MODE == 'prod':
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('BLOG_BUCKET_NAME')

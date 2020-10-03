@@ -1,7 +1,9 @@
-const baseURL = 'http://127.0.0.1:8000/api/';
+import {API_BASE_URL} from './env.js';
+
+console.log(API_BASE_URL);
 
 const axiosInstance = axios.create({
-    baseURL: baseURL,
+    baseURL: API_BASE_URL,
     timeout: 10000,
     headers: {
         Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null,

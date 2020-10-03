@@ -491,7 +491,7 @@ class PlayerModel {
     async createNewPlaylist(title, description, files) {
         let res;
         const config = {headers: {Authorization: 'JWT ' + localStorage.getItem('access_token'), 'Content-Type': 'multipart/form-data'}}
-        const URL = 'http://127.0.0.1:8000/api/playlist/'
+        const URL = `${API_BASE_URL}/playlist`
 
         let formData = new FormData();
         formData.append('title', title);
