@@ -91,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'musicdb',
-        'USER': 'postgres',
+        'USER': 'viet',
         'PASSWORD': 'qviet1997',
         'HOST': '127.0.0.1' if MODE == 'dev' else 'music-db.ctq5ilytyql4.eu-central-1.rds.amazonaws.com',
         'PORT': '5432',
