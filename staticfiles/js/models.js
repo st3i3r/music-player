@@ -194,9 +194,14 @@ class PlayerModel {
     }
 
     async updatePlaylists() {
-        this.playlists = await axiosInstance.get('playlist/').then(response => response.data);
-        this.playlists.push(await this.likedSongsPlaylist());
+        this.playlists = [];
         this.playlists.push(await this.allSongsPlaylist());
+        this.playlists.push(await this.likedSongsPlaylist());
+        await axiosInstance.get('playlist/').then(response => {
+            if (response.statusText === 'OK') {
+                response.data.forEach(playlist => this.playlists.push(playlist));
+            }
+        });
 
         this.userPlaylists = await this.getUserPlaylists() || [];
     }
