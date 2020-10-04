@@ -199,7 +199,17 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:3000',
                         'http://localhost:8000',
                         'http://18.192.37.56']
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'Authorization',
+    'Content-Type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=800),

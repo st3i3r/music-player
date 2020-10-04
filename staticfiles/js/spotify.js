@@ -197,16 +197,17 @@ class PlayerController {
     }
 
     handlerLogout = () => {
-        axiosInstance.post('account/logout/', {refresh_token: getCookie('refresh_token')}).then(response => {
+        axiosInstance.post('account/logout/', {refresh_token: getCookie('refresh_token')}).then(async response => {
             if (response.statusText === 'OK') {
                 axiosInstance.defaults.headers['Authorization'] = null;
                 deleteCookie('access_token');
                 deleteCookie('refresh_token');
 
-                this.rootView.changeAccountState(new AccountState(null))
+                const guest = await axiosInstance.get('account/current-user/').then(res => res.data);
+                this.rootView.changeAccountState(new AccountState(guest))
                 if (this.playerState.state.stateName !== 'queue' && this.playerState.state.stateName !== 'browse') {
                     const currentPlaylist = this.playlistState.playlist;
-                    this.playerState.changeState(new PlaylistState(currentPlaylist, null));
+                    this.playerState.changeState(new PlaylistState(currentPlaylist, guest));
                     this.rootView.addMessage({message: 'Logout successfully !', timeout: 3000, primary: false});
                 }
             }
@@ -243,7 +244,7 @@ class PlayerController {
             } else if (response.statusText === 'Unauthorized') {
                 this.rootView.addMessage({message: "Wrong credentials !!!", timeout: 5000, primary: false});
             }
-        }).catch(err => {console.log(err); this.rootView.addMessage({message: 'Unknown error !!!', timeout: 3000, primary: false})});
+        }).catch(err => this.rootView.addMessage({message: 'Unknown error !!!', timeout: 3000, primary: false}));
     }
 
     handlerChooseSong = async (id) => {
@@ -490,6 +491,7 @@ class PlayerController {
         await axios.post(URL, formData, config).then(response => {
             if (response.statusText === 'Created') {
                 const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs')
+                allSongsPlaylist.songs.unshift(response.data);
                 if (this.playerState.stateName !== 'browse' && this.playerState.stateName !== 'queue') {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));

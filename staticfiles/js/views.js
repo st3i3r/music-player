@@ -931,13 +931,13 @@ class AccountState {
 
         const profile = document.createElement('img');
         profile.className = 'bg-dark profile-icon profile-icon-sm';
-        profile.src = this.user && this.user.profile_picture ? this.user.profile_picture : "https://image.shutterstock.com/z/stock-vector-default-avatar-profile-icon-grey-photo-placeholder-518740753.jpg"
+        profile.src = this.user.profile_picture ? this.user.profile_picture : "https://image.shutterstock.com/z/stock-vector-default-avatar-profile-icon-grey-photo-placeholder-518740753.jpg"
 
         const usernameDiv = document.createElement('div');
         usernameDiv.className = "nav-link d-flex align-items-center active m-0 px-3";
         usernameDiv.setAttribute("role", "button");
         usernameDiv.setAttribute('data-toggle', 'dropdown');
-        const username = this.user !== null && this.user.username ? this.user.username : 'Guest';
+        const username = this.user.username ? this.user.username : 'Guest';
         usernameDiv.innerHTML = `
               <span class="text-white dropdown-toggle align-middle p-0" id="username">
                     ${username}
@@ -947,7 +947,7 @@ class AccountState {
         const dropdown = document.createElement('div');
         dropdown.className = 'dropdown-menu dropdown-menu-right';
         dropdown.setAttribute('aria-labelledby', "accountDropdown");
-        if (this.user !== null && this.user.username === '') {
+        if (this.user.username === '') {
             dropdown.innerHTML = `<a type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Login</a>`;
         } else {
             dropdown.innerHTML = `
