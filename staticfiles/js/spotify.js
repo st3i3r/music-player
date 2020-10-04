@@ -495,9 +495,11 @@ class PlayerController {
         formData.append('file', files[0]);
 
         await axios.post(URL, formData, config).then(response => {
-            if (response.statusText === 'Created') {
-                const allSongsPlaylist = await this.playerModel.playlists.find(playlist => playlist.title === 'All Songs')
-                await allSongsPlaylist.songs.unshift(response.data);
+                if (response.statusText === 'Created') {
+                    const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
+                    allSongsPlaylist.songs.unshift(response.data);
+                }
+            }).then(response => {
                 if (this.playerState.stateName !== 'browse' && this.playerState.stateName !== 'queue') {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
@@ -507,7 +509,6 @@ class PlayerController {
                     this.playlistState.highlightSong(this.playerModel.currentSong);
                 }
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
-            }
         }).catch(err => {
             if (err.response.statusText === 'Unauthorized' && err.response.status === 401) {
                 this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
