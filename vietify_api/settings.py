@@ -179,6 +179,26 @@ elif MODE == 'prod':
 else:
     print("Mode not specified !!!")
 
+
+
+
+
+config = configparser.ConfigParser()
+module_dir = os.path.split(os.path.abspath(__file__))[0]
+config.read(f'{module_dir}/config.ini')
+CURRENT_SITE_DOMAIN = 'localhost:8000'
+AWS_ACCESS_KEY_ID = config['aws']['aws_access_key_id']
+AWS_SECRET_ACCESS_KEY = config['aws']['aws_secret_access_key']
+AWS_STORAGE_BUCKET_NAME = config['aws']['blog_bucket_name']
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# AWS MEDIA STORAGE
+PUBLIC_MEDIA_LOCATION = 'media'
+MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
+
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
