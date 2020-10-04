@@ -562,7 +562,6 @@ class PlayerController {
             this.playlistState.updateLoveIcon(id, liked);
             info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
 
-            await this.playerModel.updatePlaylists();
         } else if (response.statusText === 'Unauthorized') {
             info = 'Login required !!!';
         }
@@ -575,6 +574,7 @@ class PlayerController {
     }
 
     handlerChoosePlaylist = async (playlistTitle) => {
+        this.playerModel.updatePlaylists();
         const playlist = this.playerModel.playlists.find(playlist => playlist.title === playlistTitle);
         this.playerState.changeState(new PlaylistState(playlist, this.rootView.userId));
         this.playlistState.highlightSong(this.playerModel.currentSong);
@@ -595,7 +595,7 @@ class PlayerController {
     //
     handlerBrowseState = async () => {
         await this.playerModel.updatePlaylists();
-        this.playerState.changeState(new BrowseState(this.playerModel.playlists));
+        await this.playerState.changeState(new BrowseState(this.playerModel.playlists));
         this.browseState = this.playerState.state;
 
         // Add event listener for btn
