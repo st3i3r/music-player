@@ -149,7 +149,7 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_DEFAULT_ACL = 'public-read'
 
-if MODE == 'dev':
+if MODE:
     config = configparser.ConfigParser()
     module_dir = os.path.split(os.path.abspath(__file__))[0]
     config.read(f'{module_dir}/config.ini')
@@ -160,15 +160,6 @@ if MODE == 'dev':
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # AWS MEDIA STORAGE
-    PUBLIC_MEDIA_LOCATION = 'media'
-    MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
-elif MODE == 'prod':
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('MUSIC_BUCKET_NAME')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
