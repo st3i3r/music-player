@@ -166,9 +166,8 @@ if MODE == 'dev':
 elif MODE == 'prod':
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('BLOG_BUCKET_NAME')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('MUSIC_BUCKET_NAME')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    CURRENT_SITE_DOMAIN = 'vietify.herokuapp.com'
 
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
