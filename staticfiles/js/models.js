@@ -194,7 +194,7 @@ class PlayerModel {
     }
 
     async updatePlaylists() {
-        let this.playlists = await axiosInstance.get('playlist/').then(response => response.data);
+        this.playlists = await axiosInstance.get('playlist/').then(response => response.data);
         this.playlists.push(await this.likedSongsPlaylist());
         this.playlists.push(await this.allSongsPlaylist());
 
