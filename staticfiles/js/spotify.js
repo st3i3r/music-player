@@ -477,7 +477,8 @@ class PlayerController {
 
     // Upload local file
     handlerUploadLocalFile = async (displayTitle, title, artist, files) => {
-        const config = { headers: {'Content-Type': 'multipart/form-data',
+        const config = { timeout: 600000,
+                         headers: {'Content-Type': 'multipart/form-data',
                                     Authorization: 'JWT ' + localStorage.getItem('access_token')} };
         const URL = `${API_BASE_URL}/song/`;
         let formData = new FormData();
