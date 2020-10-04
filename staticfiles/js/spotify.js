@@ -496,8 +496,8 @@ class PlayerController {
 
         await axios.post(URL, formData, config).then(response => {
             if (response.statusText === 'Created') {
-                const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs')
-                allSongsPlaylist.songs.unshift(response.data);
+                const allSongsPlaylist = await this.playerModel.playlists.find(playlist => playlist.title === 'All Songs')
+                await allSongsPlaylist.songs.unshift(response.data);
                 if (this.playerState.stateName !== 'browse' && this.playerState.stateName !== 'queue') {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
