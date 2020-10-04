@@ -562,7 +562,6 @@ class PlayerController {
             this.playlistState.updateLoveIcon(id, liked);
             info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
 
-            // Update playlist
             await this.playerModel.updatePlaylists();
         } else if (response.statusText === 'Unauthorized') {
             info = 'Login required !!!';
@@ -595,6 +594,7 @@ class PlayerController {
     // Playlist Cards
     //
     handlerBrowseState = async () => {
+        await this.playerModel.updatePlaylists();
         this.playerState.changeState(new BrowseState(this.playerModel.playlists));
         this.browseState = this.playerState.state;
 
