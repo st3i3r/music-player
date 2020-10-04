@@ -180,7 +180,11 @@ elif MODE == 'prod':
     print(AWS_STORAGE_BUCKET_NAME)
 else:
     print("Mode not specified !!!")
-    sys.exit(-1)
+
+
+AWS_ACCESS_KEY_ID = 'AKIAVOTHZ5ASUTV37WSN'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-blog-910-prod'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
