@@ -502,6 +502,9 @@ class PlayerController {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
                     this.playlistState = this.playerState.state;
+
+                    // Highlight song
+                    this.playlistState.highlightSong(this.playerModel.currentSong);
                 }
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
             }

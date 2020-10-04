@@ -87,7 +87,6 @@ WSGI_APPLICATION = 'vietify_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 MODE = os.getenv('MODE')
-print('READIMG MODE:', MODE)
 
 DATABASES = {
     'default': {
@@ -212,8 +211,8 @@ CORS_ALLOW_HEADERS = [
 ]
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=800),
-    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=1000),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 
