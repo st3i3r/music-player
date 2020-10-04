@@ -681,11 +681,12 @@ class PlaylistState {
 
 
     highlightSong(currentSong) {
-        if (currentSong === null) {
+        const songRows = Array.from(this.songListUI);
+        if (currentSong === null || songRows.length === 0) {
             return false;
         }
         // Remove class .active
-        Array.from(this.songListUI).forEach(song => {
+        songRows.forEach(song => {
             song.classList.remove('active');
         })
 

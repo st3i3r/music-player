@@ -568,16 +568,13 @@ class PlayerController {
     handlerChoosePlaylist = async (playlistTitle) => {
         const playlist = this.playerModel.playlists.find(playlist => playlist.title === playlistTitle);
         this.playerState.changeState(new PlaylistState(playlist, this.rootView.userId));
+        this.playlistState.highlightSong(this.playerModel.currentSong);
     }
 
     handlerFilterSongs = async (value) => {
         this.playlistState.clearSongs();
         this.playlistState.playlist.songs.forEach(song => {
             if (value === '') {
-                /*
-                song.style.display = 'table-row';
-                fadeIn(song);
-                */
                 this.playlistState.addSongToTable(song);
             } else if (song.title.toLowerCase().indexOf(value) !== -1) {
                 this.playlistState.addSongToTable(song);

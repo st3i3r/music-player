@@ -19,7 +19,6 @@ axiosInstance.interceptors.response.use(
 
     async err => {
         const originalRequest = err.config;
-        console.log(err);
         if (err.response.status === 401 && err.response.statusText === 'Unauthorized') {
             const refreshToken = getCookie('refresh_token');
 
