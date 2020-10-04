@@ -613,7 +613,7 @@ class PlaylistState {
 
         const tdTitle = document.createElement('div');
         tdTitle.className = 'col-4 align-middle song-title';
-        tdTitle.innerHTML = song.display_title ? song.title : song.display_title;
+        tdTitle.innerHTML = song.display_title === '' ? song.title : song.display_title;
 
         const tdArtist = document.createElement('div');
         tdArtist.className = 'col-4 align-middle';
