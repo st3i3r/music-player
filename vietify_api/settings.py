@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'vietify_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-MODE = os.environ.get('MODE')
+MODE = os.getenv('MODE')
 print('READIMG MODE:', MODE)
 
 DATABASES = {
