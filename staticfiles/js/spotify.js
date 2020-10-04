@@ -498,17 +498,16 @@ class PlayerController {
                 if (response.statusText === 'Created') {
                     const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
                     allSongsPlaylist.songs.unshift(response.data);
-                }
-            }).then(response => {
-                if (this.playerState.stateName !== 'browse' && this.playerState.stateName !== 'queue') {
-                    const currentPlaylist = this.playlistState.playlist;
-                    this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
-                    this.playlistState = this.playerState.state;
 
-                    // Highlight song
-                    this.playlistState.highlightSong(this.playerModel.currentSong);
-                }
+                    if (this.playerState.state.stateName === 'All Songs') {
+                        this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
+                        this.playlistState = this.playerState.state;
+
+                        // Highlight song
+                        this.playlistState.highlightSong(this.playerModel.currentSong);
+                    }
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
+            }
         }).catch(err => {
             if (err.response.statusText === 'Unauthorized' && err.response.status === 401) {
                 this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
