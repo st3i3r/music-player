@@ -4,8 +4,8 @@ from Accounts.forms import LoginForm
 from django.conf import settings
 
 
-LOCAL_URL = 'http://127.0.0.1:8000/api/'
-AWS_URL = 'http://18.192.37.56/api/'
+LOCAL_URL = 'http://127.0.0.1:8000/api'
+AWS_URL = 'http://18.192.37.56/api'
 
 # Create your views here.
 class HomeView(TemplateView):

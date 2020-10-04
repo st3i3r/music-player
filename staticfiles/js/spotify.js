@@ -379,9 +379,15 @@ class PlayerController {
     // Create new playlist
     handlerNewPlaylist = async (title, description, files) => {
         const response = await this.playerModel.createNewPlaylist(title, description, files);
-        if (response.success) {
-            this.playerModel.playlists.push(response.playlist);
-            this.initAddToPlaylistModal(response.playlist.songs);
+        if (response.statusText === 'Created') {
+            this.playerModel.playlists.push(response.data);
+
+            if (this.playerState.state.stateName !== 'browse') {
+                this.initAddToPlaylistModal(response.data.songs);
+            } else {
+                this.playerState.changeState(new BrowseState(this.playerModel.playlists));
+                this.handlerInitBrowseState();
+            }
         }
         this.rootView.addMessage({message: response.info, timeout: 3000, primary: false})
     }
