@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/models.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/staticfiles/js/views.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/views.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vietify_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,10 +64,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="453" y="201" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1601545978698" />
-    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601776612187">
+    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601803474433">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1601776612187" />
+    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1601803474433" />
     <state x="623" y="256" width="672" height="678" key="search.everywhere.popup" timestamp="1601455682535">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

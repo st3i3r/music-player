@@ -256,7 +256,6 @@ class PlayerModel {
             const URL = `song/lyrics/?artist=${string_to_slug(artist)}&title=${string_to_slug(title)}/`;
 
             const response = await axiosInstance.get(URL).then(res => res);
-            console.log(response)
             return response;
         } else {
             return {'lyrics': 'NO SONG'};
@@ -280,7 +279,6 @@ class PlayerModel {
 
         this.player.play();
         this.songsHistory.push(song);
-        console.log(this.songsHistory)
     }
 
     chooseSong(id) {
@@ -428,9 +426,7 @@ class PlayerModel {
         formData.append('description', description);
         formData.append('file', files[0]);
         await axios.post(URL, formData, config).then(response => {
-            console.log(response)
             if (response.statusText === 'Created') {
-                console.log(response)
                 res = response;
             }
         })

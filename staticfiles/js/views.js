@@ -873,6 +873,7 @@ class BrowseState {
 
         const cardImg = document.createElement('img')
         cardImg.className = 'card-img-top';
+        cardImg.style.maxHeight = '12rem';
 
         if (playlist.thumbnail) {
             cardImg.setAttribute('src', playlist.thumbnail);
@@ -882,10 +883,6 @@ class BrowseState {
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body d-flex flex-column justify-content-end';
-
-        const cardTitle = document.createElement('h6');
-        cardTitle.className = 'card-title font-weight-bold';
-        cardTitle.textContent = playlist.title;
 
         const cardText = document.createElement('p');
         cardText.className = 'card-text text-gray';
@@ -897,7 +894,6 @@ class BrowseState {
         playBtn.value = playlist.title;
         playBtn.id = playlist.id;
 
-        cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardText);
         cardBody.appendChild(playBtn);
 

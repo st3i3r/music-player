@@ -553,6 +553,7 @@ class PlayerController {
             const liked = response.data.liked_by.includes(this.rootView.accountState.user.id);
             this.playlistState.updateLoveIcon(id, liked);
             info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
+            this.playerModel.updatePlaylists();
         } else if (response.statusText === 'Unauthorized') {
             info = 'Login required !!!';
         }
