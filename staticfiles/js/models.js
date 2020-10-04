@@ -1,6 +1,8 @@
 import {axiosInstance, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 
+const LIKED_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2012/07/27/7490/bf37cf69686d32fde9c3ffe850123dbe-1000.jpg';
+const ALL_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2016/10/03/1022589/19ced86c47db26a166db19f2a78dd769-1400.jpg';
 
 function getUsername() {
     const username = document.getElementById('username').textContent.trim();
@@ -157,6 +159,7 @@ class PlayerModel {
             title: 'Liked Songs',
             description: 'Your favorite songs ...',
             slug: 'liked-songs',
+            thumbnail: LIKED_SONGS_THUMBNAIL_URL,
             songs: null,
         }
         const songs = await this.getLikedSongs();
@@ -181,6 +184,7 @@ class PlayerModel {
             title: 'All Songs',
             description: 'All songs of all users ...',
             slug: 'all-songs',
+            thumbnail: ALL_SONGS_THUMBNAIL_URL,
             songs: [],
         }
 

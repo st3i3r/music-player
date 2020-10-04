@@ -1,3 +1,4 @@
+
 class RootView {
     constructor() {
         this.state = null;
@@ -94,31 +95,6 @@ class RootView {
             const file = form.children[3].files;
             await handler(displayTitle, title, artist, file);
             this.hideLoadingState();
-        })
-    }
-
-    eventUploadSong(handler) {
-        this.uploadLinkBtn.addEventListener('click', e => {
-            $('#uploadFormModal').modal('hide');
-            e.preventDefault();
-            document.getElementById('loading').style.display = 'block';
-
-            const uploadURL = this.uploadLinkBtn.getAttribute("data-upload-url");
-
-            const displayTitle = document.getElementById('formDisplayTitle').value;
-            const title = document.getElementById('formTitle').value;
-            const artist = document.getElementById('formArtist').value;
-            const url = document.getElementById('formUrl').value;
-
-            document.getElementById('uploadLink').reset();
-
-            const songInfo = {
-                'display_title': displayTitle,
-                'title': title,
-                'artist': artist,
-                'url': url
-            }
-            handler(songInfo, uploadURL);
         })
     }
 
@@ -366,6 +342,16 @@ class PlaylistState {
         Array.from(this.removeFromQueueBtns).forEach(btn => {
             btn.style.display = 'none';
         })
+
+        if (this.stateName !== 'All Songs' && this.stateName !== 'Liked Songs' && this.stateName !== 'queue') {
+            Array.from(this.removeFromPlaylistBtns).forEach(btn => {
+                btn.style.display = 'block';
+            })
+        } else {
+            Array.from(this.removeFromPlaylistBtns).forEach(btn => {
+                btn.style.display = 'none';
+            })
+        }
     }
 
     queueActionState() {
@@ -374,6 +360,9 @@ class PlaylistState {
         })
         Array.from(this.removeFromQueueBtns).forEach(btn => {
             btn.style.display = 'block';
+        })
+        Array.from(this.removeFromPlaylistBtns).forEach(btn => {
+            btn.style.display = 'none';
         })
     }
 
@@ -402,6 +391,7 @@ class PlaylistState {
 
         this.addToQueueBtns = document.getElementsByClassName('btn-add-to-queue');
         this.removeFromQueueBtns = document.getElementsByClassName('btn-remove-from-queue');
+        this.removeFromPlaylistBtns = document.getElementsByClassName('btn-remove-from-playlist');
         this.likeBtns = document.getElementsByClassName('fa-heartbeat');
 
         this.shuffleBtnUI = document.getElementById('shuffleBtn');
@@ -414,7 +404,7 @@ class PlaylistState {
                                     <a class="dropdown-item py-2" data-toggle="modal" data-target="#playlistsModal${id}" href="#">Add To Playlist</a>
                                     <a class="dropdown-item py-2 btn-add-to-queue" href="#" data-pk=${id}>Add To Play Queue</a>
                                     <a class="dropdown-item py-2 btn-remove-from-queue" href="#" data-pk=${id}>Remove From Play Queue</a>
-                                    <a class="dropdown-item py-2" href="#">Something else</a>
+                                    <a class="dropdown-item py-2 btn-remove-from-playlist" href="#" data-pk=${id}>Remove From Playlist</a>
                               </div>
 
                                 <div class="modal" id="playlistsModal${id}" tabindex='-1' role="dialog" aria-labelledby="playlistModalLabel${id}" aria-hidden="true">
@@ -615,7 +605,6 @@ class PlaylistState {
         likeIcon.className = 'col-1 text-center align-middle';
 
         // Check loved song
-        console.log(this.userId);
         if (song.liked_by.includes(this.userId)) {
             likeIcon.innerHTML = '<i class="fas fa-heartbeat active"></i>';
         } else {
@@ -624,13 +613,7 @@ class PlaylistState {
 
         const tdTitle = document.createElement('div');
         tdTitle.className = 'col-4 align-middle song-title';
-
-        // Check if displayTitle
-        if (song.display_title === undefined || song.display_title === '') {
-            tdTitle.innerHTML = song.title;
-        } else {
-            tdTitle.innerHTML = song.display_title;
-        }
+        tdTitle.innerHTML = song.display_title ? song.title : song.display_title;
 
         const tdArtist = document.createElement('div');
         tdArtist.className = 'col-4 align-middle';
@@ -872,6 +855,7 @@ class BrowseState {
     createPlaylistCard(playlist) {
         const playlistCard = document.createElement('div');
         playlistCard.className = 'card';
+        playlistCard.style.backgroundColor = '#131313';
         playlistCard.opacity = 0;
 
         const cardImg = document.createElement('img')

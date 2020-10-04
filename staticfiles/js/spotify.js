@@ -451,6 +451,12 @@ class PlayerController {
 
     handlerAddPlaylistToModal = async (playlist, song, isAdded) => {
         this.playlistState.addPlaylistToModal(playlist, song, isAdded);
+        Array.from(this.playlistState.removeFromPlaylistBtns).forEach(btn => {
+            btn.onclick = () => {
+                this.rootView.addMessage({message: 'Not implemented yet !!!', timeout: 3000, primary: false});
+            }
+        })
+
         this.handlerBtnAddToPlaylist(song);
     }
 
