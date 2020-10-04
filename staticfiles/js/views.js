@@ -682,18 +682,19 @@ class PlaylistState {
 
 
     highlightSong(currentSong) {
-        const songRows = Array.from(this.songListUI);
-        if (currentSong === null || songRows.length === 0) {
+        if (currentSong === null) {
             return false;
         }
         // Remove class .active
-        songRows.forEach(song => {
+        Array.from(this.songListUI).forEach(song => {
             song.classList.remove('active');
         })
 
         // Add class .active
         const song = Array.from(this.songListUI).find(song => parseInt(song.id) === currentSong.id);
-        song.classList.add('active');
+        if (song !== undefined) {
+            song.classList.add('active');
+        }
     }
 
     clearPlaylistsFilterModal(songPk) {
