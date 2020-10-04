@@ -1,4 +1,4 @@
-import {axiosInstance, setCookie, getCookie, deleteCookie} from './axios.js';
+import {axiosInstance, string_to_slug, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 import PlayerModel from './models.js';
 import {RootView, PlayerState, PlaylistState, BrowseState, AccountState, fadeOut, fadeIn} from './views.js';
@@ -574,8 +574,14 @@ class PlayerController {
     }
 
     handlerChoosePlaylist = async (playlistTitle) => {
-        await this.playerModel.updatePlaylists();
-        const playlist = this.playerModel.playlists.find(playlist => playlist.title === playlistTitle);
+        let playlist;
+        if (playlistTitle === 'All Songs') {
+            playlist = await this.playerModel.allSongsPlaylist();
+        } else if (playlistTitle === 'Liked Songs') {
+            playlist = await this.playerModel.likedSongsPlaylist();
+        } else {
+            playlist = await axiosInstance.get(`playlist/${string_to_slug(playlistTitle)}`).then(response => response.data);
+        }
         this.playerState.changeState(new PlaylistState(playlist, this.rootView.userId));
         this.playlistState.highlightSong(this.playerModel.currentSong);
     }

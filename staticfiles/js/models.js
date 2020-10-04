@@ -1,4 +1,4 @@
-import {axiosInstance, setCookie, getCookie, deleteCookie} from './axios.js';
+import {axiosInstance, string_to_slug, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 
 const LIKED_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2012/07/27/7490/bf37cf69686d32fde9c3ffe850123dbe-1000.jpg';
@@ -38,23 +38,6 @@ class Queue {
     }
 
 }
-
-function string_to_slug (str) {
-    str = str.replace(/^\s+|\s+$/g, ''); // trim
-    str = str.toLowerCase();
-
-    // remove accents, swap ñ for n, etc
-    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to   = "aaaaeeeeiiiioooouuuunc------";
-    for (var i=0, l=from.length ; i<l ; i++) {
-        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-    }
-
-    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-        .replace(/\s+/g, '-') // collapse whitespace and replace by -
-        .replace(/-+/g, '-'); // collapse dashes
-    return str;
-};
 
 
 class SongQueue {
