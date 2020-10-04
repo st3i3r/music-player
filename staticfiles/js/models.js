@@ -421,13 +421,6 @@ class PlayerModel {
         return response;
     }
 
-    // Update love state in JS Model
-    updateLoveState(id) {
-        // Change loved state in Model
-        const song = this.getSongByPk(id);
-        song.liked = !song.liked;
-    }
-
     // Create new playlist in backend
     async createNewPlaylist(title, description, files) {
         let res;
