@@ -555,8 +555,8 @@ class PlayerController {
         const response = await this.playerModel.toggleLikeSong(id);
         let info;
         if (response.statusText === 'OK') {
-            this.playlistState.updateLoveIcon(id, liked);
             const liked = response.data.liked_by.includes(this.rootView.accountState.user.id);
+            this.playlistState.updateLoveIcon(id, liked);
             info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
 
             // Update playlist
