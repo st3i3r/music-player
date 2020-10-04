@@ -615,6 +615,7 @@ class PlaylistState {
         likeIcon.className = 'col-1 text-center align-middle';
 
         // Check loved song
+        console.log(this.userId);
         if (song.liked_by.includes(this.userId)) {
             likeIcon.innerHTML = '<i class="fas fa-heartbeat active"></i>';
         } else {

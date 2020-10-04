@@ -157,16 +157,23 @@ class PlayerModel {
             title: 'Liked Songs',
             description: 'Your favorite songs ...',
             slug: 'liked-songs',
-            songs: [],
+            songs: null,
         }
+        const songs = await this.getLikedSongs();
+        playlist.songs = songs;
 
+        return playlist;
+    }
+
+    async getLikedSongs() {
+        let songs;
         await axiosInstance.get('song/?liked=True').then(response => {
             if (response.statusText === 'OK') {
-                response.data.forEach(song => playlist.songs.push(song));
+                songs = response.data;
             }
         })
 
-        return playlist;
+        return songs;
     }
 
     async allSongsPlaylist() {
