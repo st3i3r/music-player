@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from datetime import timedelta
 import configparser
+import sys
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -86,6 +87,7 @@ WSGI_APPLICATION = 'vietify_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 MODE = os.environ.get('MODE')
+print('READIMG MODE:', MODE)
 
 DATABASES = {
     'default': {
@@ -178,26 +180,7 @@ elif MODE == 'prod':
     print(AWS_STORAGE_BUCKET_NAME)
 else:
     print("Mode not specified !!!")
-
-
-
-
-
-config = configparser.ConfigParser()
-module_dir = os.path.split(os.path.abspath(__file__))[0]
-config.read(f'{module_dir}/config.ini')
-CURRENT_SITE_DOMAIN = 'localhost:8000'
-AWS_ACCESS_KEY_ID = config['aws']['aws_access_key_id']
-AWS_SECRET_ACCESS_KEY = config['aws']['aws_secret_access_key']
-AWS_STORAGE_BUCKET_NAME = config['aws']['blog_bucket_name']
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
-# AWS MEDIA STORAGE
-PUBLIC_MEDIA_LOCATION = 'media'
-MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
-
-
+    sys.exit(-1)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

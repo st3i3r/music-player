@@ -17,6 +17,7 @@ class HomeView(TemplateView):
         context['user'] = self.request.user
 
         url = ''
+        print("MODE", settings.MODE)
         if settings.MODE == 'dev':
             url = LOCAL_URL
         if settings.MODE == 'prod':
