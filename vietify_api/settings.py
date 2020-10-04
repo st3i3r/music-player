@@ -172,6 +172,10 @@ elif MODE == 'prod':
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
+
+    print(AWS_ACCESS_KEY_ID)
+    print(AWS_SECRET_ACCESS_KEY)
+    print(AWS_STORAGE_BUCKET_NAME)
 else:
     print("Mode not specified !!!")
 
