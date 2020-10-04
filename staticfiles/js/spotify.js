@@ -563,7 +563,7 @@ class PlayerController {
             info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
 
             // Update playlist
-            this.playerModel.updatePlaylists();
+            await this.playerModel.updatePlaylists();
         } else if (response.statusText === 'Unauthorized') {
             info = 'Login required !!!';
         }

@@ -459,7 +459,7 @@ class PlaylistState {
         shuffleBtn.type = 'button'
         shuffleBtn.className = 'btn btn-green p-2 my-2 w-100';
         shuffleBtn.id = 'shuffleBtn';
-        shuffleBtn.value = 'SHUFFLE PLAY';
+        shuffleBtn.value = 'SHUFFLE PLAYLIST';
         shuffleBtn.playlistName = playlistName;
 
         return shuffleBtn;
