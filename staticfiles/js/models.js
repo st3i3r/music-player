@@ -1,4 +1,4 @@
-import axiosInstance from './axios.js';
+import {axiosInstance, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 
 
@@ -417,81 +417,10 @@ class PlayerModel {
         song.liked = !song.liked;
     }
 
-    // Get cookie
-    getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue
-    }
-
-    // Upload local file
-    uploadLocalFile(form, uploadURL) {
-        const xhr = new XMLHttpRequest();
-
-        let data;
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                data = JSON.parse(xhr.responseText);
-            } else {
-                data = {
-                    'response': null,
-                    'success': false,
-                    'info': 'UPLOAD FAILED !!!'
-                }
-            }
-        }
-
-        xhr.open('POST', uploadURL, false);
-
-        const csrf_token = this.getCookie('csrftoken');
-        xhr.setRequestHeader('X-CSRFToken', csrf_token)
-        const formData = new FormData(form)
-        xhr.send(formData);
-
-        return data;
-    }
-
-    // Send ajax request to upload song
-    uploadSong(song, uploadURL) {
-        const xhr = new XMLHttpRequest();
-
-        let data;
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                data = JSON.parse(xhr.responseText);
-            } else {
-                data = {
-                    'response': null,
-                    'success': false,
-                    'info': 'UPLOAD FAILED !!!'
-                }
-                console.log('Upload failed');
-            }
-        }
-
-        xhr.open('POST', uploadURL, false);
-
-        const csrf_token = this.getCookie('csrftoken');
-        xhr.setRequestHeader('X-CSRFToken', csrf_token)
-        xhr.send(JSON.stringify(song));
-
-        return data;
-    }
-
     // Create new playlist in backend
     async createNewPlaylist(title, description, files) {
         let res;
-        const config = {headers: {Authorization: 'JWT ' + localStorage.getItem('access_token'), 'Content-Type': 'multipart/form-data'}}
+        const config = {headers: {Authorization: 'JWT ' + getCookie('access_token'), 'Content-Type': 'multipart/form-data'}}
         const URL = `${API_BASE_URL}/playlist/`
 
         let formData = new FormData();

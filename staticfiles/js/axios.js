@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
     timeout: 10000,
     headers: {
-        Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null,
+        Authorization: getCookie('access_token') ? 'JWT ' + getCookie('access_token') : null,
         'Content-Type': 'application/json',
         accept: 'application/json'
     }
@@ -21,7 +21,7 @@ axiosInstance.interceptors.response.use(
         const originalRequest = err.config;
         console.log(err);
         if (err.response.status === 401 && err.response.statusText === 'Unauthorized') {
-            const refreshToken = localStorage.getItem('refresh_token');
+            const refreshToken = getCookie('refresh_token');
 
             if (refreshToken) {
                 const now = Math.ceil(Date.now() / 1000);
@@ -29,10 +29,10 @@ axiosInstance.interceptors.response.use(
 
                 if (tokenParts.exp > now) {
                     return axiosInstance.post('account/token/refresh/', {refresh: refreshToken}).then(response => {
-                        localStorage.setItem('access_token', response.data.access);
+                        setCookie('access_token', response.data.access);
 
-                        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
-                        originalRequest.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
+                        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
+                        originalRequest.headers['Authorization'] = 'JWT ' + getCookie('access_token');
 
                         return axiosInstance(originalRequest);
                     })
@@ -41,8 +41,8 @@ axiosInstance.interceptors.response.use(
                     axiosInstance.defaults.headers['Authorization'] = null;
                     originalRequest.headers['Authorization'] = null;
 
-                    localStorage.removeItem('refresh_token');
-                    localStorage.removeItem('access_token');
+                    deleteCookie('refresh_token');
+                    deleteCookie('access_token');
 
                     return axiosInstance(originalRequest);
                 }
@@ -58,4 +58,31 @@ axiosInstance.interceptors.response.use(
     }
 )
 
-export default axiosInstance;
+function setCookie(key, value) {
+    document.cookie = `${key}=${value}`;
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue
+}
+
+function deleteCookie(name) {
+    let now = new Date();
+    const expiredTime = now - 10000;
+    now.setTime(expiredTime);
+    document.cookie = `${name}=; expires=${now.toUTCString()}`;
+}
+
+export {axiosInstance, setCookie, deleteCookie, getCookie};

@@ -1,4 +1,4 @@
-import axiosInstance from './axios.js';
+import {axiosInstance, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 import PlayerModel from './models.js';
 import {RootView, PlayerState, PlaylistState, BrowseState, AccountState, fadeOut, fadeIn} from './views.js';
@@ -197,11 +197,11 @@ class PlayerController {
     }
 
     handlerLogout = () => {
-        axiosInstance.post('account/logout/', {refresh_token: localStorage.getItem('refresh_token')}).then(response => {
+        axiosInstance.post('account/logout/', {refresh_token: getCookie('refresh_token')}).then(response => {
             if (response.statusText === 'OK') {
                 axiosInstance.defaults.headers['Authorization'] = null;
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('refresh_token');
+                deleteCookie('access_token');
+                deleteCookie('refresh_token');
 
                 this.rootView.changeAccountState(new AccountState(null))
                 if (this.playerState.state.stateName !== 'queue' && this.playerState.state.stateName !== 'browse') {
@@ -219,10 +219,10 @@ class PlayerController {
             password: password
         }).then(async response => {
             if (response.statusText === 'OK') {
-                localStorage.setItem('access_token', response.data.access);
-                localStorage.setItem('refresh_token', response.data.refresh);
+                setCookie('access_token', response.data.access);
+                setCookie('refresh_token', response.data.refresh);
 
-                axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
+                axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
 
                 const user = await this.playerModel.getCurrentUser();
                 this.rootView.changeAccountState(new AccountState(user));
@@ -230,7 +230,7 @@ class PlayerController {
 
                 await this.playerModel.updatePlaylists();
 
-                if (this.playerState.stateName !== 'browse' && this.playerState.stateName !== 'queue') {
+                if (this.playerState.state.stateName !== 'browse' && this.playerState.state.stateName !== 'queue') {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
                     this.playlistState = this.playerState.state;
@@ -243,7 +243,7 @@ class PlayerController {
             } else if (response.statusText === 'Unauthorized') {
                 this.rootView.addMessage({message: "Wrong credentials !!!", timeout: 5000, primary: false});
             }
-        }).catch(err => this.rootView.addMessage({message: 'Unknown error !!!', timeout: 3000, primary: false}));
+        }).catch(err => {console.log(err); this.rootView.addMessage({message: 'Unknown error !!!', timeout: 3000, primary: false})});
     }
 
     handlerChooseSong = async (id) => {
@@ -479,7 +479,7 @@ class PlayerController {
     handlerUploadLocalFile = async (displayTitle, title, artist, files) => {
         const config = { timeout: 600000,
                          headers: {'Content-Type': 'multipart/form-data',
-                                    Authorization: 'JWT ' + localStorage.getItem('access_token')} };
+                                    Authorization: 'JWT ' + getCookie('access_token')} };
         const URL = `${API_BASE_URL}/song/`;
         let formData = new FormData();
         formData.append('display_title', displayTitle);
