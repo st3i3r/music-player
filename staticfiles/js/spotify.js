@@ -550,8 +550,7 @@ class PlayerController {
         let info;
         if (response.statusText === 'OK') {
             // Add to liked-songs
-            this.playerModel.updatePlaylists();
-            console.log(this.playerModel.playlists)
+            await this.playerModel.updatePlaylists();
 
             const liked = response.data.liked_by.includes(this.rootView.accountState.user.id);
             this.playlistState.updateLoveIcon(id, liked);
