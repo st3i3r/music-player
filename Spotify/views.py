@@ -3,26 +3,12 @@ from django.views.generic import TemplateView
 from Accounts.forms import LoginForm
 from django.conf import settings
 
-
-LOCAL_URL = 'http://127.0.0.1:8000/api'
-AWS_URL = 'http://18.192.37.56/api'
-
 # Create your views here.
 class HomeView(TemplateView):
     template_name = 'spotify.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['login_form'] = LoginForm()
-        context['user'] = self.request.user
-
-        url = ''
-        print("MODE", settings.MODE)
-        if settings.MODE == 'dev':
-            url = LOCAL_URL
-        if settings.MODE == 'prod':
-            url = AWS_URL
-
-        context['base_url'] = url
+        context['base_url'] = settings.API_BASE_URL
 
         return context

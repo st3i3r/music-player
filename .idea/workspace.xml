@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vietify_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spotify/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spotify/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

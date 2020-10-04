@@ -160,6 +160,8 @@ if MODE == 'dev':
     AWS_STORAGE_BUCKET_NAME = config['aws']['blog_bucket_name']
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
+    API_BASE_URL = 'http://127.0.0.1:8000/api'
+
     # AWS MEDIA STORAGE
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
@@ -174,9 +176,7 @@ elif MODE == 'prod':
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'StorageBackend.MediaStorage'
 
-    print(AWS_ACCESS_KEY_ID)
-    print(AWS_SECRET_ACCESS_KEY)
-    print(AWS_STORAGE_BUCKET_NAME)
+    API_BASE_URL = os.environ.get('API_BASE_URL')
 else:
     print("Mode not specified !!!")
 
