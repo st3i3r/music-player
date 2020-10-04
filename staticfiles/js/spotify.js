@@ -574,7 +574,7 @@ class PlayerController {
     }
 
     handlerChoosePlaylist = async (playlistTitle) => {
-        this.playerModel.updatePlaylists();
+        await this.playerModel.updatePlaylists();
         const playlist = this.playerModel.playlists.find(playlist => playlist.title === playlistTitle);
         this.playerState.changeState(new PlaylistState(playlist, this.rootView.userId));
         this.playlistState.highlightSong(this.playerModel.currentSong);
