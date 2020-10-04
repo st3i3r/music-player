@@ -15,6 +15,13 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['login_form'] = LoginForm()
         context['user'] = self.request.user
-        context['base_url'] = LOCAL_URL if settings.MODE == 'dev' else AWS_URL
+
+        url = ''
+        if settings.MODE == 'dev':
+            url = LOCAL_URL
+        if settings.MODE == 'prod':
+            url = AWS_URL
+
+        context['base_url'] = url
 
         return context
