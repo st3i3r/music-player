@@ -196,7 +196,9 @@ AUTH_USER_MODEL = 'Accounts.VieUser'
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000',
                         'http://localhost:8000',
-                        'http://18.192.37.56']
+                        'http://18.192.37.56',
+                        'http://music.pwn40.online',
+                        'https://music.pwn40.online']
 
 CORS_ALLOW_HEADERS = [
     'accept',
