@@ -16,7 +16,7 @@ def api_root(request, format=None):
     return Response({
         'song': api_reverse('song-api:song-listcreate', request=request, format=format),
         'playlist': api_reverse('playlist-api:playlist-listcreate', request=request, format=format),
-        'account': api_reverse('accounts:user-listcreate', request=request, format=format)
+        'account': api_reverse('accounts:user-list', request=request, format=format)
     })
 
 
@@ -31,7 +31,7 @@ class UserRegisterView(generics.GenericAPIView):
                 'info': 'User successfully registered.'
             }
             if new_user:
-                return JsonResponse(data=data, status=status.HTTP_201_CREATED)
+                return Response(data=data, status=status.HTTP_201_CREATED)
         print(type(reg_serializer.errors))
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

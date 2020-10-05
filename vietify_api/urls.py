@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from Spotify.views import HomeView
 
 app_name = 'api'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('Spotify.urls', namespace='home')),
+    path('', HomeView.as_view(), name='home'),
     path('', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include('Accounts.urls', namespace='accounts')),
     path('api/song/', include('SongAPI.urls', namespace='song-api')),
