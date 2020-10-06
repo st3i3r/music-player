@@ -589,6 +589,7 @@ class PlayerController {
         } else {
             songs = this.playlistState.playlist.songs;
             this.playlistState.setSongs(songs);
+            this.handlerInitPlaylistState();
             this.playlistState.highlightSong(this.playerModel.currentSong);
 
             // Change state for action dropdown
