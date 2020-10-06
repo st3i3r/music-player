@@ -12,13 +12,13 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = ['id', 'file', 'youtube_url', 'display_title', 'title', 'artist', 'duration', 'uploaded_user', 'liked_by']
-        read_only_fields = ['uploaded_user']
+        read_only_fields = ['duration']
 
     def create(self, validated_data):
-        youtube_url = validated_data.pop('youtube_url')
+        youtube_url = validated_data.get('youtube_url', None)
         if youtube_url:
             audio_link = apputils.get_file(youtube_url)
-            instance = super().save(youtube_url=audio_link)
+            # TODO
         else:
             song = validated_data.get('file')
             tag = TinyTag.get(song.temporary_file_path())

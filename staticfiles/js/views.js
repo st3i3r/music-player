@@ -104,8 +104,8 @@ class RootView {
             e.preventDefault();
             this.showLoadingState();
             const form = document.getElementById('uploadFile');
-            const title = form.children[0].value;
-            const displayTitle = form.children[1].value;
+            const displayTitle = form.children[0].value;
+            const title = form.children[1].value;
             const artist = form.children[2].value;
             const file = form.children[3].files;
             await handler(displayTitle, title, artist, file);
@@ -636,7 +636,7 @@ class PlaylistState {
 
         const tdDuration = document.createElement('div');
         tdDuration.className = 'col-2 align-middle';
-        tdDuration.innerHTML = 'Duration';
+        tdDuration.innerHTML = song.duration;
 
         const tdAction = document.createElement('div');
         tdAction.className = 'col-1 align-items-center d-flex justify-content-center';
