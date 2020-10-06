@@ -70,6 +70,8 @@ class PlayerController {
         this.rootView.eventChoosePlaylist(this.handlerChoosePlaylist)
         // Upload local song
         this.rootView.eventUploadLocalFile(this.handlerUploadLocalFile);
+        // Upload by youtube url
+        this.rootView.eventUploadYoutubeLink(this.handlerUploadLink);
         // Event toggle lyrics checkbox
         this.rootView.eventToggleLyrics(this.handlerToggleLyrics);
         // Create new playlist
@@ -482,8 +484,54 @@ class PlayerController {
         })
     }
 
+    // Upload by youtube link
+    handlerUploadLink = async (displayTitle, title, artist, link) => {
+        // Check file
+        if (link === '') {
+            this.rootView.addMessage({message: 'No Youtube-URL specified !!!', timeout: 3000, primary: false});
+            return false;
+        }
+
+        const config = { timeout: 600000,
+                         headers: {'Content-Type': 'multipart/form-data',
+                                    Authorization: 'JWT ' + getCookie('access_token')} };
+        const URL = `${API_BASE_URL}/song/`;
+        let formData = new FormData();
+        formData.append('display_title', displayTitle);
+        formData.append('title', title);
+        formData.append('artist', artist);
+        formData.append('youtube_url', link);
+
+        await axios.post(URL, formData, config).then(response => {
+            console.log(response)
+                if (response.statusText === 'Created') {
+                    const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
+                    allSongsPlaylist.songs.unshift(response.data);
+
+                    if (this.playerState.state.stateName === 'All Songs') {
+                        this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
+                        this.playlistState = this.playerState.state;
+
+                        // Highlight song
+                        this.playlistState.highlightSong(this.playerModel.currentSong);
+                    }
+                this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
+            }
+        }).catch(err => {
+            if (err.response.statusText === 'Unauthorized' && err.response.status === 401) {
+                this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
+            }
+        });
+    }
+
     // Upload local file
     handlerUploadLocalFile = async (displayTitle, title, artist, files) => {
+        // Check file
+        if (files.length === 0) {
+            this.rootView.addMessage({message: 'No song uploaded !!!', timeout: 3000, primary: false});
+            return false;
+        }
+
         const config = { timeout: 600000,
                          headers: {'Content-Type': 'multipart/form-data',
                                     Authorization: 'JWT ' + getCookie('access_token')} };
@@ -495,6 +543,7 @@ class PlayerController {
         formData.append('file', files[0]);
 
         await axios.post(URL, formData, config).then(response => {
+            console.log(response)
                 if (response.statusText === 'Created') {
                     const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
                     allSongsPlaylist.songs.unshift(response.data);

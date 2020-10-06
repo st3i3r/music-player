@@ -5,7 +5,8 @@ from Accounts.models import VieUser
 
 
 class Song(models.Model):
-    file = models.FileField(storage=custom_storage.MusicStorage())
+    file = models.FileField(storage=custom_storage.MusicStorage(), blank=True, null=True)
+    youtube_url = models.URLField(blank=True, null=True)
     display_title = models.CharField(max_length=100, blank=True)
     artist = models.CharField(max_length=100)
     title = models.CharField(max_length=50)

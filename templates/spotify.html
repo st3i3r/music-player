@@ -24,7 +24,7 @@
                     <a class="btn-green nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Upload</a>
                     <div class="dropdown-menu" style="">
                       <a type="button" class="dropdown-item" data-toggle="modal" data-target="#uploadFileModal">Local File</a>
-                      <a type="button" class="dropdown-item" data-toggle="modal" data-target="#uploadFormModal">Youtube URL</a>
+                      <a type="button" class="dropdown-item" data-toggle="modal" data-target="#uploadLinkModal">Youtube URL</a>
                     </div>
                   </li>
                   <li class="nav-item">
@@ -131,9 +131,9 @@
                 </div>
                 <div class="modal-body">
                     <form id="uploadFile" enctype="multipart/form-data">
-                        <input id="title" class="form-control mb-2" type="text" placeholder="Song title" />
-                        <input id="displayTitle" class="form-control mb-2" type="text" placeholder="Display title" />
-                        <input id="artist" class="form-control mb-2" type="text" placeholder="Song artist" />
+                        <input id="displayTitle" class="form-control mb-2" type="text" placeholder="Display title (optional)" />
+                        <input id="title" class="form-control mb-2" type="text" placeholder="Title" />
+                        <input id="artist" class="form-control mb-2" type="text" placeholder="Artist" />
                         <input id="file" class="form-control" type="file" placeholder="File" />
                     </form>
                 </div>
@@ -147,19 +147,19 @@
     <div class="d-none" id="baseURL" data-base-url="{{ base_url }}"></div>
 
     <!-- Youtube Upload Form Modal -->
-    <div class="modal" id="uploadFormModal" tabindex="-1" role="dialog" aria-labelledby="uploadFormModalLabel" aria-hidden="true">
+    <div class="modal" id="uploadLinkModal" tabindex="-1" role="dialog" aria-labelledby="uploadLinkModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-fixed" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="uploadFormModalLabel">Upload Song</h5>
+            <h5 class="modal-title" id="uploadLinkModalLabel">Upload Song</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
               <form id="uploadLink" enctype="multipart/form-data">
-                  <input class="form-control w-75 mb-2" id="formDisplayTitle" type="text" placeholder="Display Title (Optional)" />
-                 <input class="form-control w-75 mb-2" id="formTitle" type="text" placeholder="Title" />
+                  <input class="form-control w-75 mb-2" id="formDisplayTitle" type="text" placeholder="Display title (Optional)" />
+                  <input class="form-control w-75 mb-2" id="formTitle" type="text" placeholder="Title" />
                   <input class="form-control w-75 mb-2" id="formArtist" type="text" placeholder="Artist" />
                   <input class="form-control w-100 mb-2" id="formUrl" type="url" placeholder="Youtube URL" />
               </form>

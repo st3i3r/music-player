@@ -83,6 +83,21 @@ class RootView {
         })
     }
 
+    eventUploadYoutubeLink(handler) {
+        this.uploadLinkBtn.addEventListener('click', async e => {
+            $('#uploadLinkModal').modal('hide');
+            e.preventDefault();
+            this.showLoadingState();
+            const form = document.getElementById('uploadLink');
+            const displayTitle = form.children[0].value;
+            const title = form.children[1].value;
+            const artist = form.children[2].value;
+            const link = form.children[3].value;
+            await handler(displayTitle, title, artist, link);
+            this.hideLoadingState();
+        })
+    }
+
     eventUploadLocalFile(handler) {
         this.uploadFileBtn.addEventListener('click', async e => {
             $('#uploadFileModal').modal('hide');
