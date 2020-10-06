@@ -22,7 +22,12 @@ class SongSerializer(serializers.ModelSerializer):
         else:
             song = validated_data.get('file')
             tag = TinyTag.get(song.temporary_file_path())
+
+            data = validated_data.copy()
+            validated_data['title'] = validated_data['title'] if validated_data['title'] != '' else tag.title
+            validated_data['artist'] = validated_data['artist'] if validated_data['artist'] != '' else tag.artist
             duration = apputils.format_time(int(tag.duration))
+
             instance = Song.objects.create(duration=duration, **validated_data)
 
         return instance
