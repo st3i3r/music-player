@@ -880,6 +880,7 @@ class BrowseState {
         const cardImg = document.createElement('img')
         cardImg.className = 'card-img-top';
         cardImg.style.maxHeight = '12rem';
+        cardImg.style.objectFit = 'cover';
 
         if (playlist.thumbnail) {
             cardImg.setAttribute('src', playlist.thumbnail);
