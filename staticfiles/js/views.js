@@ -95,6 +95,7 @@ class RootView {
             const link = form.children[3].value;
             await handler(displayTitle, title, artist, link);
             this.hideLoadingState();
+            form.reset();
         })
     }
 
@@ -110,6 +111,7 @@ class RootView {
             const file = form.children[3].files;
             await handler(displayTitle, title, artist, file);
             this.hideLoadingState();
+            form.reset();
         })
     }
 
@@ -127,6 +129,7 @@ class RootView {
             const username = form.children[0].value;
             const password = form.children[1].value;
             handler(username, password);
+            form.reset();
         })
     }
 
@@ -150,6 +153,7 @@ class RootView {
 
             handler(title, description, files);
             this.hideLoadingState();
+            form.reset();
         })
     }
 
