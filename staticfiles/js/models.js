@@ -195,7 +195,7 @@ class PlayerModel {
 
     sliceNormalQueue() {
         // Slice queue from current playing song to end
-        this.songQueue.updateNormalQueue(this.songQueue.normalQueue.queue);
+        this.songQueue.updateNormalQueue(this.songs);
         const index = this.songQueue.normalQueue.queue.indexOf(this.currentSong);
         for (let i = 0; i <= index; i++) {
             this.songQueue.normalQueue.dequeue();

@@ -9,13 +9,10 @@ from PlaylistAPI.models import Playlist
 from rest_framework import status
 from .models import Song
 import lyricsgenius
-from tinytag import TinyTag
-import apputils
 
 
 class SongListCreateView(generics.ListCreateAPIView):
     queryset = Song.objects.all()
-    permission_classes = [AllowAny]
     serializer_class = SongSerializer
     parser_classes = [MultiPartParser, FormParser]
 
