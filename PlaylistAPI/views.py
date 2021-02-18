@@ -27,7 +27,6 @@ class PlaylistListCreateView(generics.ListCreateAPIView):
         serializer.save(created_datetime=timezone.now(),
                         created_user=self.request.user,
                         slug=slugify(serializer.validated_data.get('title')))
-        print(serializer.errors)
 
 
 class PlaylistRUDView(generics.RetrieveUpdateDestroyAPIView):

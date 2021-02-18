@@ -376,7 +376,7 @@ class PlayerController {
     }
 
     handlerWaiting = () => {
-        this.rootView.addMessage({message: 'Loading song ...', timeout: 1000, primary: false});
+        this.rootView.addMessage({message: 'Loading song ...', timeout: 2000, primary: false});
     }
 
     // Create new playlist
@@ -404,7 +404,10 @@ class PlayerController {
         this.playlistState.clearPlaylistsFilterModal();
         currentSongs.forEach(song => {
             if (this.playerModel.userPlaylists.length === 0) {
-                document.getElementById(`playlistContainerModal${song.id}`).innerHTML = "<h5>YOU HAVE NO PLAYLIST !!!</h5>";
+                const container = document.getElementById(`playlistContainerModal${song.id}`)
+                if (container !== null) {
+                    innerHTML = "<h5>YOU HAVE NO PLAYLIST !!!</h5>";
+                }
             } else {
                 this.playerModel.userPlaylists.forEach(playlist => {
                     const songPks = playlist.songs.map(song => song.id);
@@ -492,6 +495,8 @@ class PlayerController {
             return false;
         }
 
+        this.rootView.addMessage({message: 'Not implemented !!!', timeout: 5000, primary: false});
+
         const config = { timeout: 600000,
                          headers: {'Content-Type': 'multipart/form-data',
                                     Authorization: 'JWT ' + getCookie('access_token')} };
@@ -528,13 +533,14 @@ class PlayerController {
     handlerUploadLocalFile = async (displayTitle, title, artist, files) => {
         // Check file
         if (files.length === 0) {
-            this.rootView.addMessage({message: 'No song uploaded !!!', timeout: 3000, primary: false});
+            this.rootView.addMessage({message: 'File is required!!!', timeout: 3000, primary: false});
             return false;
         }
 
         const config = { timeout: 600000,
                          headers: {'Content-Type': 'multipart/form-data',
-                                    Authorization: 'JWT ' + getCookie('access_token')} };
+                                    Authorization: 'JWT ' + getCookie('access_token')}
+                        };
         const URL = `${API_BASE_URL}/song/`;
         let formData = new FormData();
         formData.append('display_title', displayTitle);
@@ -543,18 +549,19 @@ class PlayerController {
         formData.append('file', files[0]);
 
         await axios.post(URL, formData, config).then(response => {
-            console.log(response)
-                if (response.statusText === 'Created') {
-                    const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
-                    allSongsPlaylist.songs.unshift(response.data);
+            if (response.statusText === 'Unauthorized' && response.status === 401) {
+                this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
+            } else if (response.statusText === 'Created') {
+                const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
+                allSongsPlaylist.songs.unshift(response.data);
 
-                    if (this.playerState.state.stateName === 'All Songs') {
-                        this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
-                        this.playlistState = this.playerState.state;
+                if (this.playerState.state.stateName === 'All Songs') {
+                    this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
+                    this.playlistState = this.playerState.state;
 
-                        // Highlight song
-                        this.playlistState.highlightSong(this.playerModel.currentSong);
-                    }
+                    // Highlight song
+                    this.playlistState.highlightSong(this.playerModel.currentSong);
+                }
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
             }
         }).catch(err => {
@@ -611,7 +618,7 @@ class PlayerController {
         if (response.statusText === 'OK') {
             const liked = response.data.liked_by.includes(this.rootView.accountState.user.id);
             this.playlistState.updateLoveIcon(id, liked);
-            info = liked ? 'Song added to favorite !' : 'Song removed from favorite !';
+            info = liked ? 'Added to favorite songs!' : 'Removed from favorite songs!';
 
         } else if (response.statusText === 'Unauthorized') {
             info = 'Login required !!!';

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="" />
+    <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/spotify.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/spotify.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +42,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../django-app" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/staticfiles" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.YoutubeDownloader (1)">
     <configuration name="YoutubeDownloader (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -99,61 +113,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="593" y="247" key="#Inspections" timestamp="1601979316052">
+    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup" timestamp="1613619121843">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="593" y="247" key="#Inspections/0.0.1920.1080@0.0.1920.1080" timestamp="1601979316052" />
-    <state x="663" y="351" width="584" height="371" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601731363830">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="663" y="351" width="584" height="371" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1601731363830" />
-    <state x="742" y="308" width="426" height="456" key="FileChooserDialogImpl" timestamp="1601371372056">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="742" y="308" width="426" height="456" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1601371372056" />
-    <state width="1895" height="298" key="GridCell.Tab.0.bottom" timestamp="1602090549819">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602090549819" />
-    <state width="1895" height="298" key="GridCell.Tab.0.center" timestamp="1602090549818">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="298" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602090549818" />
-    <state width="1895" height="298" key="GridCell.Tab.0.left" timestamp="1602090549818">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="298" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602090549818" />
-    <state width="1895" height="298" key="GridCell.Tab.0.right" timestamp="1602090549818">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="298" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602090549818" />
-    <state width="1895" height="367" key="GridCell.Tab.1.bottom" timestamp="1602090413433">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="367" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602090413433" />
-    <state width="1895" height="367" key="GridCell.Tab.1.center" timestamp="1602090413433">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="367" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602090413433" />
-    <state width="1895" height="367" key="GridCell.Tab.1.left" timestamp="1602090413433">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="367" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602090413433" />
-    <state width="1895" height="367" key="GridCell.Tab.1.right" timestamp="1602090413433">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1895" height="367" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602090413433" />
-    <state x="453" y="201" key="SettingsEditor" timestamp="1602145953957">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="453" y="201" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1602145953957" />
-    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602089564620">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="535" y="256" width="652" height="591" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1602089564620" />
-    <state x="623" y="256" width="672" height="678" key="search.everywhere.popup" timestamp="1601980860582">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="623" y="256" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1601980860582" />
+    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1613619121843" />
   </component>
 </project>

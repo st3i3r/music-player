@@ -45,8 +45,8 @@ def toggle_like(request, pk):
     else:
         instance.liked_by.add(request.user)
 
-    seralizer = SongSerializer(instance, context={'request': request})
-    return Response(data=seralizer.data, status=status.HTTP_200_OK)
+    serializer = SongSerializer(instance, context={'request': request})
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['PUT'])

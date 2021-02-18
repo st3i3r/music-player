@@ -17,7 +17,6 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         playlist = Playlist.objects.create(**validated_data)
-
         return playlist
 
     def update(self, instance, validated_data):

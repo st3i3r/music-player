@@ -14,7 +14,6 @@ class CustomPermissions(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if request.method == 'PUT':
-            print('PUT')
             if obj.owner == request.user:
                 return True
 
