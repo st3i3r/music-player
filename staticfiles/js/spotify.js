@@ -406,7 +406,7 @@ class PlayerController {
             if (this.playerModel.userPlaylists.length === 0) {
                 const container = document.getElementById(`playlistContainerModal${song.id}`)
                 if (container !== null) {
-                    innerHTML = "<h5>YOU HAVE NO PLAYLIST !!!</h5>";
+                    container.innerHTML = "<h5>YOU HAVE NO PLAYLIST !!!</h5>";
                 }
             } else {
                 this.playerModel.userPlaylists.forEach(playlist => {
