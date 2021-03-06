@@ -458,8 +458,18 @@ class PlayerModel {
         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
     }
 
-    handleSuccessLogin(user) {
+    async handleSuccessLogin(user) {
         this.userId = user.id;
+        await this.updatePlaylists();
+    }
+
+    async handleSuccessLogout() {
+        axiosInstance.defaults.headers['Authorization'] = null;
+        deleteCookie('access_token');
+        deleteCookie('refresh_token');
+
+        this.userId = null;
+        await this.updatePlaylists();
     }
 }
 

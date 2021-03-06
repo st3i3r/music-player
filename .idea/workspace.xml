@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlaylistAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/staticfiles/js/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/models.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/js/views.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/views.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/spotify.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/spotify.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -89,7 +89,9 @@ class PlayerController {
                 return null
             });
         await this.rootView.changeAccountState(new AccountState(user));
+
         if (user !== null) {
+            this.playerModel.userId = user.id;
             this.rootView.userId = this.rootView.accountState.user.id;
             this.rootView.accountState.eventLogout(this.handlerLogout);
         }
@@ -207,11 +209,7 @@ class PlayerController {
     handlerLogout = () => {
         axiosInstance.post('user/logout/', {refresh_token: getCookie('refresh_token')}).then(async response => {
             if (response.status === 200) {
-                axiosInstance.defaults.headers['Authorization'] = null;
-                deleteCookie('access_token');
-                deleteCookie('refresh_token');
-
-                await this.playerModel.updatePlaylists();
+                await this.playerModel.handleSuccessLogout();
                 this.rootView.changeAccountState(new AccountState(null))
 
                 if (this.playerState.state.stateName !== 'queue' && this.playerState.state.stateName !== 'browse') {
@@ -221,6 +219,7 @@ class PlayerController {
                 } else {
                     this.playerState.changeState(new BrowseState(this.playerModel.playlists));
                     this.handlerInitBrowseState();
+                    console.log(this.playerModel.userId);
                 }
             }
         })
@@ -235,16 +234,13 @@ class PlayerController {
                 await this.playerModel.updateCredentials(response.data);
                 const user = await this.playerModel.getCurrentUser();
 
-                this.playerModel.handleSuccessLogin(user);
+                await this.playerModel.handleSuccessLogin(user);
                 this.rootView.changeAccountState(new AccountState(user));
                 this.rootView.accountState.eventLogout(this.handlerLogout);
 
-                // Move to player model handler
-                await this.playerModel.updatePlaylists();
-
                 if (this.playerState.state.stateName !== 'browse' && this.playerState.state.stateName !== 'queue') {
                     const currentPlaylist = this.playlistState.playlist;
-                    this.playerState.changeState(new PlaylistState(currentPlaylist, this.rootView.userId));
+                    this.playerState.changeState(new PlaylistState(currentPlaylist, this.playerModel.userId));
                     this.playlistState = this.playerState.state;
 
                     // Highlight Song
@@ -535,7 +531,7 @@ class PlayerController {
                     allSongsPlaylist.songs.unshift(response.data);
 
                     if (this.playerState.state.stateName === 'All Songs') {
-                        this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
+                        this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.playerModel.userId));
                         this.playlistState = this.playerState.state;
 
                         // Highlight song
@@ -577,7 +573,7 @@ class PlayerController {
                 allSongsPlaylist.songs.unshift(response.data);
 
                 if (this.playerState.state.stateName === 'All Songs') {
-                    this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.rootView.userId));
+                    this.playerState.changeState(new PlaylistState(allSongsPlaylist, this.playerModel.userId));
                     this.playlistState = this.playerState.state;
 
                     // Highlight song
@@ -663,7 +659,7 @@ class PlayerController {
         } else {
             playlist = await axiosInstance.get(`playlist/${string_to_slug(playlistTitle)}`).then(response => response.data);
         }
-        this.playerState.changeState(new PlaylistState(playlist, this.rootView.userId));
+        this.playerState.changeState(new PlaylistState(playlist, this.playerModel.userId));
         this.playlistState.highlightSong(this.playerModel.currentSong);
     }
 
