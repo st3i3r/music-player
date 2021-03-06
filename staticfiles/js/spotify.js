@@ -163,9 +163,9 @@ class PlayerController {
         this.playlistState.eventChooseSong(this.handlerChooseSong);
 
         // Event toggle display queue
-        this.playlistState.displayQueueBtnUI.addEventListener('click', e => {
+        this.playlistState.displayQueueBtnUI.onclick = (e) => {
             this.handlerDisplayQueue();
-        })
+        }
 
         // Event Shuffle
         this.playlistState.shuffleBtnUI.onclick = this.handlerShufflePlaylist;
@@ -673,8 +673,18 @@ class PlayerController {
             }
         })
 
-        // Bind events-handler
-        this.handlerInitPlaylistState();
+        this.playlistState.eventChooseSong(this.handlerChooseSong);
+
+        // Event toggle display queue
+        this.playlistState.displayQueueBtnUI.onclick = (e) => {
+            this.handlerDisplayQueue();
+        }
+
+        // Add/remove song to/from queue
+        this.playlistState.eventAddToQueue(this.handlerAddToQueue);
+
+        // Event love song
+        this.playlistState.eventToggleLikeSong(this.handlerToggleLikeSong);
     }
 
     // Playlist Cards
