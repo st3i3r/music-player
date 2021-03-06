@@ -538,7 +538,7 @@ class PlayerController {
             if (err.response.statusText === 'Unauthorized' && err.response.status === 401) {
                 this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
             } else if (err.response.status === 400) {
-                this.rootView.addMessage({message: 'Failed to updload song !!!', timeout: 5000, primary: false});
+                this.rootView.addMessage({message: 'Failed to upload song !!!', timeout: 5000, primary: false});
             }
         });
     }

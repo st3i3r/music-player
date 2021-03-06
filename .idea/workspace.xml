@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputils/YoutubeDownloader/YoutubeDownloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/apputils/YoutubeDownloader/YoutubeDownloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

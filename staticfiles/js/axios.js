@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use(
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
                 if (tokenParts.exp > now) {
-                    return axiosInstance.post('account/token/refresh/', {refresh: refreshToken}).then(response => {
+                    return axiosInstance.post('user/token/refresh/', {refresh: refreshToken}).then(response => {
                         setCookie('access_token', response.data.access);
 
                         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
