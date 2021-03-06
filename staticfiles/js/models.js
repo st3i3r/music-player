@@ -413,7 +413,7 @@ class PlayerModel {
     }
 
     // Create new playlist in backend
-    async createNewPlaylist(title, description, files) {
+    async createNewPlaylist(title, description, files, shared) {
         let res;
         const config = {headers: {Authorization: 'JWT ' + getCookie('access_token'), 'Content-Type': 'multipart/form-data'}}
         const URL = `${API_BASE_URL}/playlist/`
@@ -424,6 +424,7 @@ class PlayerModel {
         if (files.length > 0) {
             formData.append('thumbnail', files[0]);
         }
+        formData.append('shared', shared);
         await axios.post(URL, formData, config).then(response => {
             res = response;
         }).catch(err => res = err.response);

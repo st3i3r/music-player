@@ -159,8 +159,9 @@ class RootView {
             const title = form.children[0].value;
             const description = form.children[1].value;
             const files = form.children[2].files;
+            const shared = form.children[3].children[0].checked;
 
-            handler(title, description, files);
+            handler(title, description, files, shared);
             this.hideLoadingState();
             form.reset();
         })

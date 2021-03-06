@@ -206,16 +206,21 @@ class PlayerController {
 
     handlerLogout = () => {
         axiosInstance.post('user/logout/', {refresh_token: getCookie('refresh_token')}).then(async response => {
-            if (response.statusText === 'OK') {
+            if (response.status === 200) {
                 axiosInstance.defaults.headers['Authorization'] = null;
                 deleteCookie('access_token');
                 deleteCookie('refresh_token');
 
+                await this.playerModel.updatePlaylists();
                 this.rootView.changeAccountState(new AccountState(null))
+
                 if (this.playerState.state.stateName !== 'queue' && this.playerState.state.stateName !== 'browse') {
                     const currentPlaylist = this.playlistState.playlist;
                     this.playerState.changeState(new PlaylistState(currentPlaylist, null));
                     this.rootView.addMessage({message: 'Logout successfully !', timeout: 3000, primary: false});
+                } else {
+                    this.playerState.changeState(new BrowseState(this.playerModel.playlists));
+                    this.handlerInitBrowseState();
                 }
             }
         })
@@ -234,6 +239,7 @@ class PlayerController {
                 this.rootView.changeAccountState(new AccountState(user));
                 this.rootView.accountState.eventLogout(this.handlerLogout);
 
+                // Move to player model handler
                 await this.playerModel.updatePlaylists();
 
                 if (this.playerState.state.stateName !== 'browse' && this.playerState.state.stateName !== 'queue') {
@@ -244,6 +250,9 @@ class PlayerController {
                     // Highlight Song
                     this.playlistState.highlightSong(this.playerModel.currentSong);
 
+                } else {
+                    this.playerState.changeState(new BrowseState(this.playerModel.playlists));
+                    this.handlerInitBrowseState();
                 }
                 this.rootView.addMessage({message: "Logged in successfully !", timeout: 5000, primary: false});
             } else if (response.statusText === 'Unauthorized') {
@@ -388,8 +397,8 @@ class PlayerController {
     }
 
     // Create new playlist
-    handlerNewPlaylist = async (title, description, files) => {
-        const response = await this.playerModel.createNewPlaylist(title, description, files);
+    handlerNewPlaylist = async (title, description, files, shared) => {
+        const response = await this.playerModel.createNewPlaylist(title, description, files, shared);
         if (response.status === 201) {
             this.playerModel.playlists.push(response.data);
             this.rootView.addMessage({message: "Successfully created playlist !", timeout: 5000, primary: false})

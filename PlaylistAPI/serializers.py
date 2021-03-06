@@ -30,4 +30,4 @@ class PlaylistSerializer(serializers.ModelSerializer):
 class PlaylistCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
-        fields = ["title", "description", "thumbnail"]
+        fields = ["title", "description", "thumbnail", "shared"]
