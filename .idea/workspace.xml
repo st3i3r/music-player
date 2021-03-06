@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/views.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/views.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,14 +114,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="496" y="368" width="934" height="377" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1615018372013" />
-    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1615032167235">
+    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1615039597501">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1615032167235" />
-    <state x="657" y="261" width="611" height="592" key="find.popup" timestamp="1614937493752">
+    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1615039597501" />
+    <state x="660" y="264" width="611" height="592" key="find.popup" timestamp="1615039407804">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="657" y="261" width="611" height="592" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1614937493752" />
+    <state x="660" y="264" width="611" height="592" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1615039407804" />
     <state x="623" y="260" width="672" height="678" key="search.everywhere.popup" timestamp="1615032573437">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -1,6 +1,8 @@
 const BACKGROUND_URLS = [
     "https://www.wallpaperup.com/uploads/wallpapers/2013/03/24/61377/b28524b209e8e798c8fe40a6f7fa7a57-1400.jpg",
-    "https://www.wallpaperup.com/uploads/wallpapers/2016/04/01/920018/a7df89c8ccbdb6f37c717362047cac4d-1400.jpg",
+    "https://www.wallpaperup.com/uploads/wallpapers/2013/12/02/182103/4b3f040c33bd4f33c8a08676bb2aa7b3-1400.jpg",
+    "https://django-blog-910-prod.s3.eu-central-1.amazonaws.com/media/img/song-thumbnail.jpg",
+    "https://www.wallpaperup.com/uploads/wallpapers/2017/05/05/1088653/f708cd76e60e6631af8fc71d1ea85b5c-1400.jpg"
 ]
 
 const DEFAULT_PLAYLIST_THUMBNAIL_URL = "https://www.wallpaperup.com/uploads/wallpapers/2014/03/11/296551/2f2759fd809cd12283f737f7cb437cd9-1000.jpg";
@@ -236,7 +238,10 @@ class PlayerState {
         // Random background wallpaper
         let randomIndex = Math.floor(Math.random()*BACKGROUND_URLS.length);
         let randomBackgroundURL = BACKGROUND_URLS[randomIndex];
-        document.getElementById("playerWrapper").style.background = `linear-gradient(to top, black 15%, rgba(10,10,10,0)), url(${randomBackgroundURL})`;
+        const wrapper = document.getElementById("playerWrapper")
+        wrapper.style.background = `linear-gradient(to top, black 15%, rgba(10,10,10,0)), url(${randomBackgroundURL})`;
+        wrapper.style.backgroundSize = "cover";
+        wrapper.style.backgroundPosition = "center";
     }
 
     setupVars() {
