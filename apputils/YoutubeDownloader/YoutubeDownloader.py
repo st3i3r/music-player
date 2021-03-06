@@ -10,7 +10,7 @@ def format_time(time):
 
 def download_file(url, dir):
     youtube = pytube.YouTube(url)
-    video = youtube.streams.first()
+    video = youtube.streams.get_audio_only()
     return video.download(dir)
 
 
