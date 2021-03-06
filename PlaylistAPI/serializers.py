@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from django.utils.text import slugify
 from .models import Playlist
-from Accounts.models import VieUser
 from SongAPI.serializers import SongSerializer
-from SongAPI.models import Song
 
 
 class PlaylistSerializer(serializers.ModelSerializer):
@@ -27,3 +25,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
         instance.created_user = validated_data.get('created_user', instance.created_user)
 
         return instance
+
+
+class PlaylistCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Playlist
+        fields = ["title", "description", "thumbnail"]

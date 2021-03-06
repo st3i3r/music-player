@@ -68,7 +68,6 @@ axiosInstance.interceptors.response.use(
 
             return false;
         }
-        console.log('Unknown errors', err);
         return Promise.reject(err);
     }
 )

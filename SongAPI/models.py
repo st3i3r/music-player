@@ -14,6 +14,7 @@ class Song(models.Model):
     uploaded_time = models.DateTimeField(default=timezone.now)
     uploaded_user = models.ForeignKey(VieUser, on_delete=models.CASCADE)
     liked_by = models.ManyToManyField(VieUser, related_name='liked_songs', blank=True)
+    shared = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-uploaded_time']

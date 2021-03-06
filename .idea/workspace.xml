@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b5792df7-3344-4a07-a922-ab028a84420e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/PlaylistAPI/migrations/0003_auto_20210306_0106.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SongAPI/migrations/0007_song_shared.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlaylistAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlaylistAPI/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SongAPI/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spotify/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Spotify/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputils/YoutubeDownloader/YoutubeDownloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/apputils/YoutubeDownloader/YoutubeDownloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputils/YoutubeDownloader/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apputils/YoutubeDownloader/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/css/spotify.css" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/css/spotify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/models.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/staticfiles/js/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/spotify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/js/views.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/js/views.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/spotify.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/spotify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vietify_api/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vietify_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vietify_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vietify_api/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,9 +134,21 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup" timestamp="1613619121843">
+    <state x="496" y="368" width="934" height="377" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615018372013">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1613619121843" />
+    <state x="496" y="368" width="934" height="377" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1615018372013" />
+    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1615023876167">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="530" y="243" width="856" height="597" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1615023876167" />
+    <state x="657" y="261" width="611" height="592" key="find.popup" timestamp="1614937493752">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="657" y="261" width="611" height="592" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1614937493752" />
+    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup" timestamp="1615022876849">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="260" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1615022876849" />
   </component>
 </project>

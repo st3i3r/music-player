@@ -1,3 +1,12 @@
+const BACKGROUND_URLS = [
+    "https://www.wallpaperup.com/uploads/wallpapers/2013/03/24/61377/b28524b209e8e798c8fe40a6f7fa7a57-1400.jpg",
+    "https://www.wallpaperup.com/uploads/wallpapers/2016/04/01/920018/a7df89c8ccbdb6f37c717362047cac4d-1400.jpg",
+]
+
+const DEFAULT_PLAYLIST_THUMBNAIL_URL = "https://www.wallpaperup.com/uploads/wallpapers/2014/03/11/296551/2f2759fd809cd12283f737f7cb437cd9-1000.jpg";
+const HOME_ICON = "https://django-blog-910-prod.s3.eu-central-1.amazonaws.com/media/img/home-sticker.png";
+const GUEST_PROFILE_PICTURE = "https://image.shutterstock.com/z/stock-vector-default-avatar-profile-icon-grey-photo-placeholder-518740753.jpg";
+
 
 class RootView {
     constructor() {
@@ -222,6 +231,11 @@ class PlayerState {
                 </div>
             `;
         document.getElementById('progressBar').value = 0;
+
+        // Random background wallpaper
+        let randomIndex = Math.floor(Math.random()*BACKGROUND_URLS.length);
+        let randomBackgroundURL = BACKGROUND_URLS[randomIndex];
+        document.getElementById("playerWrapper").style.background = `linear-gradient(to top, black 15%, rgba(10,10,10,0)), url(${randomBackgroundURL})`;
     }
 
     setupVars() {
@@ -514,7 +528,7 @@ class PlaylistState {
 
         // Icon
         const img = document.createElement('img');
-        img.src = 'https://django-blog-910-prod.s3.eu-central-1.amazonaws.com/media/img/music.webp'
+        img.src = HOME_ICON;
         img.style.width = '10rem';
         img.id = 'backIcon';
         img.style.cursor = 'pointer';
@@ -528,7 +542,7 @@ class PlaylistState {
         if (this.playlist.thumbnail) {
             playlistThumbnail.setAttribute('src', this.playlist.thumbnail);
         } else {
-            playlistThumbnail.setAttribute('src', "https://www.wallpaperup.com/uploads/wallpapers/2013/08/13/133513/307948ed064a3ebb40f16da3fffa2200.jpg");
+            playlistThumbnail.setAttribute('src', DEFAULT_PLAYLIST_THUMBNAIL_URL);
         }
 
         const playlistInfo = document.createElement('div');
@@ -624,7 +638,7 @@ class PlaylistState {
         likeIcon.className = 'col-1 text-center align-middle';
 
         // Check loved song
-        if (song.liked_by.includes(this.userId)) {
+        if (this.userId !== null && song.liked_by.includes(this.userId)) {
             likeIcon.innerHTML = '<i class="fas fa-heartbeat active"></i>';
         } else {
             likeIcon.innerHTML = '<i class="fas fa-heartbeat"></i>';
@@ -724,7 +738,7 @@ class PlaylistState {
         if (playlist.thumbnail) {
             playlistThumbnail.setAttribute('src', playlist.thumbnail);
         } else {
-            playlistThumbnail.setAttribute('src', "https://www.wallpaperup.com/uploads/wallpapers/2013/08/13/133513/307948ed064a3ebb40f16da3fffa2200.jpg");
+            playlistThumbnail.setAttribute('src', DEFAULT_PLAYLIST_THUMBNAIL_URL);
         }
 
         const playlistInfo = document.createElement('div');
@@ -885,7 +899,7 @@ class BrowseState {
         if (playlist.thumbnail) {
             cardImg.setAttribute('src', playlist.thumbnail);
         } else {
-            cardImg.setAttribute('src', "https://www.wallpaperup.com/uploads/wallpapers/2013/08/13/133513/307948ed064a3ebb40f16da3fffa2200.jpg");
+            cardImg.setAttribute('src', DEFAULT_PLAYLIST_THUMBNAIL_URL)
         }
 
         const cardBody = document.createElement('div');
@@ -924,7 +938,6 @@ class BrowseState {
 class AccountState {
     constructor(user) {
         this.user = user;
-
         this.initUI();
     }
 
@@ -934,13 +947,13 @@ class AccountState {
 
         const profile = document.createElement('img');
         profile.className = 'bg-dark profile-icon profile-icon-sm';
-        profile.src = this.user.profile_picture ? this.user.profile_picture : "https://image.shutterstock.com/z/stock-vector-default-avatar-profile-icon-grey-photo-placeholder-518740753.jpg"
+        profile.src = this.user && this.user.profile_picture ? this.user.profile_picture : GUEST_PROFILE_PICTURE;
 
         const usernameDiv = document.createElement('div');
         usernameDiv.className = "nav-link d-flex align-items-center active m-0 px-3";
         usernameDiv.setAttribute("role", "button");
         usernameDiv.setAttribute('data-toggle', 'dropdown');
-        const username = this.user.username ? this.user.username : 'Guest';
+        const username = this.user !== null && this.user.username ? this.user.username : 'Guest';
         usernameDiv.innerHTML = `
               <span class="text-white dropdown-toggle align-middle p-0" id="username">
                     ${username}
@@ -950,7 +963,7 @@ class AccountState {
         const dropdown = document.createElement('div');
         dropdown.className = 'dropdown-menu dropdown-menu-right';
         dropdown.setAttribute('aria-labelledby', "accountDropdown");
-        if (this.user.username === '') {
+        if (this.user === null) {
             dropdown.innerHTML = `<a type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Login</a>`;
         } else {
             dropdown.innerHTML = `

@@ -18,6 +18,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Spotify.views import HomeView
+from SongAPI.urls import router as song_router
+from PlaylistAPI.urls import router as playlist_router
+
 
 app_name = 'api'
 urlpatterns = [
@@ -25,8 +28,8 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include('Accounts.urls', namespace='accounts')),
-    path('api/song/', include('SongAPI.urls', namespace='song-api')),
-    path('api/playlist/', include('PlaylistAPI.urls', namespace='playlist-api')),
+    path('api/song/', include(song_router.urls)),
+    path('api/playlist/', include(playlist_router.urls)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

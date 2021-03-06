@@ -1,12 +1,15 @@
 import {axiosInstance, string_to_slug, setCookie, getCookie, deleteCookie} from './axios.js';
 import {API_BASE_URL} from './env.js';
 
-const LIKED_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2012/07/27/7490/bf37cf69686d32fde9c3ffe850123dbe-1000.jpg';
+const LIKED_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2012/10/12/19094/c1292e4d5ab3004662897fdb3bc3442f-1400.jpg';
 const ALL_SONGS_THUMBNAIL_URL = 'https://www.wallpaperup.com/uploads/wallpapers/2016/10/03/1022589/19ced86c47db26a166db19f2a78dd769-1400.jpg';
 
 function getUsername() {
-    const username = document.getElementById('username').textContent.trim();
-    return username;
+    const username = document.getElementById('username')
+    if (username !== null) {
+        return username.textContent.trim();
+    }
+    return null;
 }
 
 
@@ -109,6 +112,7 @@ class PlayerModel {
         this.player = new Audio();
         this.randomMode = false;
         this.showLyrics = false;
+        this.userId = null;
 
         // All Playlists
         this.playlists = [];
@@ -127,7 +131,7 @@ class PlayerModel {
 
     async getCurrentUser() {
         let user;
-        await axiosInstance.get('account/current-user').then(response => user = response.data);
+        await axiosInstance.get('user/current-user').then(response => user = response.data);
 
         return user;
     }
@@ -153,7 +157,7 @@ class PlayerModel {
 
     async getLikedSongs() {
         let songs;
-        await axiosInstance.get('song/?liked=True').then(response => {
+        await axiosInstance.get('song/liked-songs').then(response => {
             if (response.statusText === 'OK') {
                 songs = response.data;
             }
@@ -185,7 +189,7 @@ class PlayerModel {
         this.playlists.push(await this.allSongsPlaylist());
         this.playlists.push(await this.likedSongsPlaylist());
         await axiosInstance.get('playlist/').then(response => {
-            if (response.statusText === 'OK') {
+            if (response.status === 200) {
                 response.data.forEach(playlist => this.playlists.push(playlist));
             }
         });
@@ -209,18 +213,24 @@ class PlayerModel {
 
     async getUserPlaylists() {
         let playlists;
-        await axiosInstance.get(`playlist?username=${getUsername()}`).then(response => {
-           if (response.statusText === 'OK') {
+        await axiosInstance.get(`playlist/my-playlists/`).then(response => {
+           if (response.status === 200) {
                 playlists = response.data;
            }
-        });
+        }).catch(err => playlists = null);
 
         return playlists;
     }
 
     async getSongByPk(id) {
-        const allSongs = await axiosInstance('song/').then(response => response.data);
-        return allSongs.find(song => song.id === id);
+        let response = await axiosInstance.get(`song/${id}`)
+                                    .then(response => response)
+                                    .catch(err => err.response);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            return null;
+        }
     }
 
     // Must be async func
@@ -247,10 +257,7 @@ class PlayerModel {
 
     async getLyrics() {
         if (this.currentSong !== undefined) {
-            const artist = this.currentSong.artist;
-            const title = this.currentSong.title;
-            const URL = `song/lyrics/?artist=${string_to_slug(artist)}&title=${string_to_slug(title)}/`;
-
+            const URL = `song/${this.currentSong.id}/lyrics/`;
             const response = await axiosInstance.get(URL).then(res => res);
             return response;
         } else {
@@ -354,7 +361,9 @@ class PlayerModel {
     // Toggle lyrics
     toggleLyrics(btnState) {
         this.showLyrics = btnState;
-        this.updateLyricsView();
+        if (this.currentSong !== null) {
+            this.updateLyricsView();
+        }
     }
 
     // After song is loaded, load duration of song to progressbar
@@ -399,8 +408,7 @@ class PlayerModel {
     // Add song to favorite
     async toggleLikeSong(id) {
         let response;
-        await axiosInstance.put(`song/${id}/like/`).then(res => response = res);
-
+        await axiosInstance.get(`song/${id}/toggle-like/`).then(res => response = res).catch(err => response = err.response);
         return response;
     }
 
@@ -413,12 +421,12 @@ class PlayerModel {
         let formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('file', files[0]);
+        if (files.length > 0) {
+            formData.append('thumbnail', files[0]);
+        }
         await axios.post(URL, formData, config).then(response => {
-            if (response.statusText === 'Created') {
-                res = response;
-            }
-        })
+            res = response;
+        }).catch(err => res = err.response);
 
         return res;
     }
@@ -433,9 +441,24 @@ class PlayerModel {
 
     async addSongToPlaylist(songPk, playlistPk) {
         let response;
-        await axiosInstance.put(`song/add/${songPk}/${playlistPk}/`).then(res => response=res);
+        let data = {
+            playlist_id: playlistPk
+        }
+        await axiosInstance.post(`song/${songPk}/add-to-playlist/`, data)
+                        .then(res => response = res)
+                        .catch(err => response = err.response);
         // this.viewUpdater(this);
         return response;
+    }
+
+    async updateCredentials(data) {
+        setCookie('access_token', data.access);
+        setCookie('refresh_token', data.refresh);
+        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
+    }
+
+    handleSuccessLogin(user) {
+        this.userId = user.id;
     }
 }
 

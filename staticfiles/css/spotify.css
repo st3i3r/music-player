@@ -95,7 +95,7 @@ html, body, .container-fluid {
 }
 
 #playerWrapper {
-    background: linear-gradient(to top, black 15%, rgba(10,10,10,0)), url('../img/song-thumbnail.jpg');
+    /* background: linear-gradient(to top, black 15%, rgba(10,10,10,0)), url('../img/song-thumbnail.jpg'); */
     background-size: cover;
     background-position: center;
     object-fit: cover;

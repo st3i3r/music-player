@@ -81,10 +81,16 @@ class PlayerController {
 
 
         //  Get logged in account
-        const user = await axiosInstance.get('account/current-user/').then(response => response.data);
+        const user = await axiosInstance.get('user/current-user/').then(
+            response => {
+                    return response.data;
+                }
+            ).catch(err => {
+                return null
+            });
         await this.rootView.changeAccountState(new AccountState(user));
-        this.rootView.userId = this.rootView.accountState.user.id;
-        if (user.username !== '') {
+        if (user !== null) {
+            this.rootView.userId = this.rootView.accountState.user.id;
             this.rootView.accountState.eventLogout(this.handlerLogout);
         }
     }
@@ -180,7 +186,7 @@ class PlayerController {
         this.playerModel.songs = this.playlistState.playlist.songs;
         this.playerModel.playlist = this.playlistState.playlist;
         this.playerModel.songQueue.updateQueue(this.playerModel.songs);
-        // this.playerModel.nextSong();
+        this.playerModel.nextSong();
         if (this.playlistState.displayQueueBtnUI.checked) {
             this.handlerDisplayQueue();
         }
@@ -199,17 +205,16 @@ class PlayerController {
     }
 
     handlerLogout = () => {
-        axiosInstance.post('account/logout/', {refresh_token: getCookie('refresh_token')}).then(async response => {
+        axiosInstance.post('user/logout/', {refresh_token: getCookie('refresh_token')}).then(async response => {
             if (response.statusText === 'OK') {
                 axiosInstance.defaults.headers['Authorization'] = null;
                 deleteCookie('access_token');
                 deleteCookie('refresh_token');
 
-                const guest = await axiosInstance.get('account/current-user/').then(res => res.data);
-                this.rootView.changeAccountState(new AccountState(guest))
+                this.rootView.changeAccountState(new AccountState(null))
                 if (this.playerState.state.stateName !== 'queue' && this.playerState.state.stateName !== 'browse') {
                     const currentPlaylist = this.playlistState.playlist;
-                    this.playerState.changeState(new PlaylistState(currentPlaylist, guest));
+                    this.playerState.changeState(new PlaylistState(currentPlaylist, null));
                     this.rootView.addMessage({message: 'Logout successfully !', timeout: 3000, primary: false});
                 }
             }
@@ -217,17 +222,15 @@ class PlayerController {
     }
 
     handlerLogin = async (username, password) => {
-        axiosInstance.post('account/token/', {
+        axiosInstance.post('user/token/', {
             username: username,
             password: password
         }).then(async response => {
-            if (response.statusText === 'OK') {
-                setCookie('access_token', response.data.access);
-                setCookie('refresh_token', response.data.refresh);
-
-                axiosInstance.defaults.headers['Authorization'] = 'JWT ' + getCookie('access_token');
-
+            if (response.status === 200) {
+                await this.playerModel.updateCredentials(response.data);
                 const user = await this.playerModel.getCurrentUser();
+
+                this.playerModel.handleSuccessLogin(user);
                 this.rootView.changeAccountState(new AccountState(user));
                 this.rootView.accountState.eventLogout(this.handlerLogout);
 
@@ -246,7 +249,9 @@ class PlayerController {
             } else if (response.statusText === 'Unauthorized') {
                 this.rootView.addMessage({message: "Wrong credentials !!!", timeout: 5000, primary: false});
             }
-        }).catch(err => this.rootView.addMessage({message: 'Unknown error !!!', timeout: 3000, primary: false}));
+        }).catch(err => {
+            this.rootView.addMessage({message: 'uuuerror !!!', timeout: 3000, primary: false})
+        });
     }
 
     handlerChooseSong = async (id) => {
@@ -276,6 +281,9 @@ class PlayerController {
     }
 
     handlerTogglePlayPause = () => {
+        if (this.playerModel.songQueue.currentQueue.queue.length === 0) {
+            this.rootView.addMessage({message: 'Empty Play Queue !!!', timeout: 3000, primary: false});
+        }
         this.playerModel.togglePlayPause();
     }
 
@@ -330,7 +338,7 @@ class PlayerController {
         if (this.playerModel.showLyrics) {
             this.playerState.showLyricsMsg('GETTING LYRICS ...');
             const response = await this.playerModel.getLyrics();
-            if (response.statusText === 'OK') {
+            if (response.status === 200) {
                 this.playerState.showLyrics(response.data.lyrics);
             }
         } else {
@@ -382,8 +390,9 @@ class PlayerController {
     // Create new playlist
     handlerNewPlaylist = async (title, description, files) => {
         const response = await this.playerModel.createNewPlaylist(title, description, files);
-        if (response.statusText === 'Created') {
+        if (response.status === 201) {
             this.playerModel.playlists.push(response.data);
+            this.rootView.addMessage({message: "Successfully created playlist !", timeout: 5000, primary: false})
 
             if (this.playerState.state.stateName !== 'browse') {
                 this.initAddToPlaylistModal(response.data.songs);
@@ -391,8 +400,11 @@ class PlayerController {
                 this.playerState.changeState(new BrowseState(this.playerModel.playlists));
                 this.handlerInitBrowseState();
             }
+        } else if (response.status === 401) {
+            this.rootView.addMessage({message: "Login required !!!", timeout: 5000, primary: false})
+        } else {
+            this.rootView.addMessage({message: "Failed to create playlist !!!", timeout: 5000, primary: false})
         }
-        this.rootView.addMessage({message: response.info, timeout: 3000, primary: false})
     }
 
     initAddToPlaylistModal = async (songs) => {
@@ -472,7 +484,7 @@ class PlayerController {
                 const songPk = parseInt(btn.getAttribute('data-song-pk'));
                 const playlistPk = parseInt(btn.getAttribute('data-playlist-pk'));
                 const response = await this.playerModel.addSongToPlaylist(songPk, playlistPk);
-                if (response.statusText === 'OK') {
+                if (response.status === 200) {
                     btn.setAttribute('disabled', true);
                     btn.value = 'Added';
                     btn.classList.remove('btn-green');
@@ -481,8 +493,11 @@ class PlayerController {
                     // Make change in model
                     const song = await this.playerModel.getSongByPk(songPk);
                     const playlist = this.playerModel.playlists.find(playlist => playlist.id === playlistPk);
-                    playlist.songs = [song, ...playlist.songs]
+                    playlist.songs = [song, ...playlist.songs];
+                } else if (response.status === 401) {
+                    this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
                 }
+
             }
         })
     }
@@ -495,8 +510,6 @@ class PlayerController {
             return false;
         }
 
-        this.rootView.addMessage({message: 'Not implemented !!!', timeout: 5000, primary: false});
-
         const config = { timeout: 600000,
                          headers: {'Content-Type': 'multipart/form-data',
                                     Authorization: 'JWT ' + getCookie('access_token')} };
@@ -508,8 +521,7 @@ class PlayerController {
         formData.append('youtube_url', link);
 
         await axios.post(URL, formData, config).then(response => {
-            console.log(response)
-                if (response.statusText === 'Created') {
+                if (response.status === 201) {
                     const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
                     allSongsPlaylist.songs.unshift(response.data);
 
@@ -521,10 +533,12 @@ class PlayerController {
                         this.playlistState.highlightSong(this.playerModel.currentSong);
                     }
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
-            }
+                }
         }).catch(err => {
             if (err.response.statusText === 'Unauthorized' && err.response.status === 401) {
                 this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
+            } else if (err.response.status === 400) {
+                this.rootView.addMessage({message: 'Failed to updload song !!!', timeout: 5000, primary: false});
             }
         });
     }
@@ -549,7 +563,7 @@ class PlayerController {
         formData.append('file', files[0]);
 
         await axios.post(URL, formData, config).then(response => {
-            if (response.statusText === 'Created') {
+            if (response.status === 201) {
                 const allSongsPlaylist = this.playerModel.playlists.find(playlist => playlist.title === 'All Songs');
                 allSongsPlaylist.songs.unshift(response.data);
 
@@ -563,7 +577,12 @@ class PlayerController {
                 this.rootView.addMessage({message: 'Song uploaded successfully !', timeout: 5000, primary: false});
             }
         }).catch(err => {
-            this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
+            if (err.response.status === 401) {
+                this.rootView.addMessage({message: 'Login required !!!', timeout: 5000, primary: false});
+            } else {
+                this.rootView.addMessage({message: err.response.statusText, timeout: 5000, primary: false});
+            }
+
         });
     }
 
@@ -610,12 +629,12 @@ class PlayerController {
         id = parseInt(id);
         const response = await this.playerModel.toggleLikeSong(id);
         let info;
-        if (response.statusText === 'OK') {
+        if (response.status === 200) {
             const liked = response.data.liked_by.includes(this.rootView.accountState.user.id);
             this.playlistState.updateLoveIcon(id, liked);
             info = liked ? 'Added to favorite songs!' : 'Removed from favorite songs!';
 
-        } else if (response.statusText === 'Unauthorized') {
+        } else {
             info = 'Login required !!!';
         }
 
@@ -648,6 +667,9 @@ class PlayerController {
                 this.playlistState.addSongToTable(song);
             }
         })
+
+        // Bind events-handler
+        this.handlerInitPlaylistState();
     }
 
     // Playlist Cards

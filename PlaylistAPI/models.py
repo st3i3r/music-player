@@ -11,12 +11,15 @@ User = get_user_model()
 # Create your models here.
 class Playlist(models.Model):
     title = models.CharField(max_length=100, blank=False, null=False, unique=True)
-    thumbnail = models.FileField(upload_to='playlist-thumbnail', storage=custom_storage.MediaStorage(), blank=True, null=True)
-    slug = models.SlugField(max_length=200)
-    description = models.CharField(max_length=100, blank=True)
+    thumbnail = models.FileField(
+        upload_to='playlist-thumbnail', storage=custom_storage.MediaStorage(), blank=True, null=True
+    )
+    slug = models.SlugField(max_length=200, blank=True)
+    description = models.CharField(max_length=100, blank=True, null=True)
     created_datetime = models.DateTimeField(auto_now_add=True)
     created_user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     songs = models.ManyToManyField(Song, related_name='playlists', blank=True)
+    shared = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['created_datetime']
